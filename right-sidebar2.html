@@ -13,8 +13,15 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<script src="jquery-3.1.0.min.js"></script> 
+	    <script> 
+	    $(function(){
+	      $("#includedContent").load("right-sidebar.html"); 
+	    });
+    </script> 
 	</head>
 	<body>
+		<div id="includedContent"></div>
 		<div id="page-wrapper">
 
 			<!-- Header -->
