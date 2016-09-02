@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>No Sidebar - Landed by HTML5 UP</title>
+		<title>How does your institution compare?</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -49,27 +49,157 @@
 			<!-- Main -->
 				<div id="main" class="wrapper style1">
 					<div class="container">
-						<header class="major">
-							<h2>No Sidebar</h2>
-							<p>Ipsum dolor feugiat aliquam tempus sed magna lorem consequat accumsan</p>
-						</header>
+						<style>
+							body {
+							  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+							  margin: auto;
+							  position: relative;
+							  width: 960px;
+							}
 
-						<!-- Content -->
-							<section id="content">
-								<a href="#" class="image fit"><img src="images/pic07.jpg" alt="" /></a>
-								<h3>Dolore Amet Consequat</h3>
-								<p>Aliquam massa urna, imperdiet sit amet mi non, bibendum euismod est. Curabitur mi justo, tincidunt vel eros ullamcorper, porta cursus justo. Cras vel neque eros. Vestibulum diam quam, mollis at magna consectetur non, malesuada quis augue. Morbi tincidunt pretium interdum est. Curabitur mi justo, tincidunt vel eros ullamcorper, porta cursus justo. Cras vel neque eros. Vestibulum diam cubilia adipiscing interdum aliquet aliquet placerat cubilia accumsan cep ante nullam adipiscing tortor odio. Iaculis adipiscing accumsan nascetur in cras. Lacinia placerat.</p>
-								<p>Vestibulum diam quam, mollis at consectetur non, malesuada quis augue. Morbi tincidunt pretium interdum. Morbi mattis elementum orci, nec dictum porta cursus justo. Quisque ultricies lorem in ligula condimentum, et egestas turpis sagittis. Cras ac nunc urna. Nullam eget lobortis purus. Phasellus vitae tortor non est placerat tristique faucibus magna adipiscing aliquet blandit nisi dolor accumsan nascetur lorem. Vis enim. Curae. Mi arcu vis aliquam ipsum non accumsan ac mi faucibus amet eu accumsan erat interdum semper accumsan. Eu sagittis tellus accumsan neque lorem penatibus in porttitor. Vivamus commodo curae. Condimentum lobortis praesent id ac lorem. Lorem vis ipsum dolor feugiat consequat dolore adipiscing.</p>
-								<h3>Sed Magna Ornare</h3>
-								<p>In vestibulum massa quis arcu lobortis tempus. Nam pretium arcu in odio vulputate luctus. Suspendisse euismod lorem eget lacinia fringilla. Sed sed felis justo. Nunc sodales elit in laoreet aliquam. Nam gravida, nisl sit amet iaculis porttitor, risus nisi rutrum metus. In accumsan lorem nunc ultrices a ac eu accumsan ac id nullam. Nec lobortis. Faucibus. Mi commodo laoreet arcu at non mi lacinia aliquet non lobortis phasellus accumsan nascetur varius. Integer orci porttitor eu faucibus aliquet faucibus ac accumsan adipiscing accumsan odio. Ut adipiscing.</p>
-								<ul>
-									<li>Faucibus orci lobortis ac adipiscing integer.</li>
-									<li>Col accumsan arcu mi aliquet placerat.</li>
-									<li>Lobortis vestibulum ut magna tempor massa nascetur.</li>
-									<li>Blandit massa non blandit tempor interdum.</li>
-									<li>Lacinia mattis arcu nascetur lobortis.</li>
-								</ul>
-							</section>
+							text {
+							  font: 10px sans-serif;
+							}
+
+							.axis path,
+							.axis line {
+							  fill: none;
+							  stroke: #000;
+							  shape-rendering: crispEdges;
+							}
+
+							form {
+							  position: absolute;
+							  right: 10px;
+							  top: 10px;
+							}
+
+							</style>
+
+							<form>
+							  <label><input type="radio" name="mode" value="grouped"> Grouped</label>
+							  <label><input type="radio" name="mode" value="stacked" checked> Stacked</label>
+							</form>
+							<script src="//d3js.org/d3.v3.min.js"></script>
+							<script>
+
+							var n = 4, // number of layers
+							    m = 58, // number of samples per layer
+							    stack = d3.layout.stack(),
+							    layers = stack(d3.range(n).map(function() { return bumpLayer(m, .1); })),
+							    yGroupMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y; }); }),
+							    yStackMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); });
+
+							var margin = {top: 40, right: 10, bottom: 20, left: 10},
+							    width = 960 - margin.left - margin.right,
+							    height = 500 - margin.top - margin.bottom;
+
+							var x = d3.scale.ordinal()
+							    .domain(d3.range(m))
+							    .rangeRoundBands([0, width], .08);
+
+							var y = d3.scale.linear()
+							    .domain([0, yStackMax])
+							    .range([height, 0]);
+
+							var color = d3.scale.linear()
+							    .domain([0, n - 1])
+							    .range(["#aad", "#556"]);
+
+							var xAxis = d3.svg.axis()
+							    .scale(x)
+							    .tickSize(0)
+							    .tickPadding(6)
+							    .orient("bottom");
+
+							var svg = d3.select("body").append("svg")
+							    .attr("width", width + margin.left + margin.right)
+							    .attr("height", height + margin.top + margin.bottom)
+							  .append("g")
+							    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+							var layer = svg.selectAll(".layer")
+							    .data(layers)
+							  .enter().append("g")
+							    .attr("class", "layer")
+							    .style("fill", function(d, i) { return color(i); });
+
+							var rect = layer.selectAll("rect")
+							    .data(function(d) { return d; })
+							  .enter().append("rect")
+							    .attr("x", function(d) { return x(d.x); })
+							    .attr("y", height)
+							    .attr("width", x.rangeBand())
+							    .attr("height", 0);
+
+							rect.transition()
+							    .delay(function(d, i) { return i * 10; })
+							    .attr("y", function(d) { return y(d.y0 + d.y); })
+							    .attr("height", function(d) { return y(d.y0) - y(d.y0 + d.y); });
+
+							svg.append("g")
+							    .attr("class", "x axis")
+							    .attr("transform", "translate(0," + height + ")")
+							    .call(xAxis);
+
+							d3.selectAll("input").on("change", change);
+
+							var timeout = setTimeout(function() {
+							  d3.select("input[value=\"grouped\"]").property("checked", true).each(change);
+							}, 2000);
+
+							function change() {
+							  clearTimeout(timeout);
+							  if (this.value === "grouped") transitionGrouped();
+							  else transitionStacked();
+							}
+
+							function transitionGrouped() {
+							  y.domain([0, yGroupMax]);
+
+							  rect.transition()
+							      .duration(500)
+							      .delay(function(d, i) { return i * 10; })
+							      .attr("x", function(d, i, j) { return x(d.x) + x.rangeBand() / n * j; })
+							      .attr("width", x.rangeBand() / n)
+							    .transition()
+							      .attr("y", function(d) { return y(d.y); })
+							      .attr("height", function(d) { return height - y(d.y); });
+							}
+
+							function transitionStacked() {
+							  y.domain([0, yStackMax]);
+
+							  rect.transition()
+							      .duration(500)
+							      .delay(function(d, i) { return i * 10; })
+							      .attr("y", function(d) { return y(d.y0 + d.y); })
+							      .attr("height", function(d) { return y(d.y0) - y(d.y0 + d.y); })
+							    .transition()
+							      .attr("x", function(d) { return x(d.x); })
+							      .attr("width", x.rangeBand());
+							}
+
+							// Inspired by Lee Byron's test data generator.
+							function bumpLayer(n, o) {
+
+							  function bump(a) {
+							    var x = 1 / (.1 + Math.random()),
+							        y = 2 * Math.random() - .5,
+							        z = 10 / (.1 + Math.random());
+							    for (var i = 0; i < n; i++) {
+							      var w = (i / n - y) * z;
+							      a[i] += x * Math.exp(-w * w);
+							    }
+							  }
+
+							  var a = [], i;
+							  for (i = 0; i < n; ++i) a[i] = o + o * Math.random();
+							  for (i = 0; i < 5; ++i) bump(a);
+							  return a.map(function(d, i) { return {x: i, y: Math.max(0, d)}; });
+							}
+
+							</script>
 
 					</div>
 				</div>
