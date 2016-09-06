@@ -3352,13 +3352,12 @@
 		}
 
 		#banner:after {
-			/*
+			
 			background-image: -moz-linear-gradient(top, rgba(23, 24, 32, 0.95), rgba(23, 24, 32, 0.95)), url("images/overlay.png");;
 			background-image: -webkit-linear-gradient(top, rgba(23, 24, 32, 0.95), rgba(23, 24, 32, 0.95)), url("images/overlay.png");;
 			background-image: -ms-linear-gradient(top, rgba(23, 24, 32, 0.95), rgba(23, 24, 32, 0.95)), url("images/overlay.png");;
 			background-image: linear-gradient(top, rgba(23, 24, 32, 0.95), rgba(23, 24, 32, 0.95)), url("images/overlay.png");;
-			*/
-			background-color: #888;
+			
 			content: '';
 			display: block;
 			height: 100%;
@@ -3554,7 +3553,7 @@
 				}
 
 				.spotlight .content {
-					background-color: #1c1d26;
+					background-color: #00ffff;
 					border-width: 0 !important;
 					border-top-width: 0.35em !important;
 					bottom: auto !important;
