@@ -3332,7 +3332,7 @@
 
 	#banner {
 		background-attachment: fixed;
-		background-color: #272833;
+		background-color: #5a8b45;
 		background-image: url("../../images/banner.jpg");
 		background-position: center center;
 		background-size: cover;
@@ -3413,7 +3413,7 @@
 /* Footer */
 
 	#footer {
-		background: #272833;
+		background: #5a8b45;
 		padding: 6em 0;
 		text-align: center;
 	}
@@ -3432,7 +3432,7 @@
 			}
 
 			#footer .icons .icon.alt:before {
-				color: #272833 !important;
+				color: #5a8b45 !important;
 				text-shadow: 1px 0 0 rgba(255, 255, 255, 0.5), -1px 0 0 rgba(255, 255, 255, 0.5), 0 1px 0 rgba(255, 255, 255, 0.5), 0 -1px 0 rgba(255, 255, 255, 0.5);
 			}
 
