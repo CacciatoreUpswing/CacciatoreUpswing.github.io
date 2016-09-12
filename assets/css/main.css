@@ -3357,7 +3357,7 @@
 			background-image: -webkit-linear-gradient(top, rgba(23, 24, 32, 0.95), rgba(23, 24, 32, 0.95)), url("images/overlay.png");;
 			background-image: -ms-linear-gradient(top, rgba(23, 24, 32, 0.95), rgba(23, 24, 32, 0.95)), url("images/overlay.png");;
 			background-image: linear-gradient(top, rgba(23, 24, 32, 0.95), rgba(23, 24, 32, 0.95)), url("images/overlay.png");;
-			
+			           
 			content: '';
 			display: block;
 			height: 100%;
@@ -3415,7 +3415,7 @@
 /* Footer */
 
 	#footer {
-		background: #5a8b45;
+		background: #e44c65;
 		padding: 6em 0;
 		text-align: center;
 	}
