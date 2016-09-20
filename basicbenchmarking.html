@@ -47,10 +47,17 @@
 		            </blockquote></p>
 		        </section>
 
+		        <section>
+        			<form>								
+						<ul class="actions">
+							<li><a href="#" class="button special"><label><input type="radio" name="mode" value="grouped"> Grouped</label></a></li>
+							<li><a href="#" class="button special"><label><input type="radio" name="mode" value="stacked" checked> Stacked</label></a></li> 
+						</ul>
+					</form>
+		        </section>
 
 
-				<div class="container">
-					
+				<div class="container">					
 						<style>
 							body {
 							  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -73,17 +80,11 @@
 							}
 						</style>
 
-							<form>								
-								<ul class="actions">
-									<li><a href="#" class="button special"><label><input type="radio" name="mode" value="grouped"> Grouped</label></a></li>
-									<li><a href="#" class="button special"><label><input type="radio" name="mode" value="stacked" checked> Stacked</label></a></li> 
-								</ul>
 
-							</form>
 							
 							<script src="//d3js.org/d3.v3.min.js"></script>
+							
 							<script>
-
 							var n = 4, // number of layers
 							    m = 58, // number of samples per layer
 							    stack = d3.layout.stack(),
@@ -198,8 +199,7 @@
 							  for (i = 0; i < n; ++i) a[i] = o + o * Math.random();
 							  for (i = 0; i < 5; ++i) bump(a);
 							  return a.map(function(d, i) { return {x: i, y: Math.max(0, d)}; });
-							}
-						
+							}			
 							</script>
 					
 				</div>
