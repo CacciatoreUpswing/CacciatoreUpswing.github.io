@@ -11,9 +11,28 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
         <link rel="stylesheet" href="assets/css/main.css" />
+        <style>
+
+            .node {
+              opacity: 0.5;
+            }
+
+            .node:hover {
+              opacity: 1;
+            }
+
+            .link {
+              stroke: #999;
+              stroke-opacity: 0.3;
+            }
+
+        </style>
+            
+        <script src="http://d3js.org/d3.v3.min.js"></script>
         <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
         <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
     </head>
+    
     <body>
         <div id="page-wrapper">
 
@@ -29,7 +48,6 @@
                                     <li><a href="overview.html">Overview</a></li>
                                     <li><a href="basicbenchmarking.html">Basic Benchmarking</a></li>
                                     <li><a href="customsolutions.html">Custom Solutions</a></li>
-
                                 </ul>
                             </li>
 
@@ -50,27 +68,6 @@
 
 
                 <div class="container">
-                    <header class="major">
-                      <head>
-                        <style>
-
-                        .node {
-                          opacity: 0.5;
-                        }
-
-                        .node:hover {
-                          opacity: 1;
-                        }
-
-                        .link {
-                          stroke: #999;
-                          stroke-opacity: 0.3;
-                        }
-
-                        </style>
-                        
-                        <script src="http://d3js.org/d3.v3.min.js"></script>
-                      </head>
                       
                         <div id="viz"></div>
                         <script>
@@ -173,8 +170,6 @@
                             });
 
                         </script>
-                      
-                    </header>
                 </div>
             </div>
         </div>
