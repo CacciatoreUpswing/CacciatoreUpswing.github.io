@@ -11,6 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<script src="//d3js.org/d3.v3.min.js"></script>
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 	</head>
@@ -49,36 +50,36 @@
 
 
 				<div class="container">		
-						<style>
-							body {
-							  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-							  margin: auto;
-							  position: relative;
-							  width: 960px;
-							}
+					<style>
+						body {
+						  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+						  margin: auto;
+						  position: relative;
+						  width: 960px;
+						}
 
-							text {
-							  font: 10px sans-serif;
-							}
+						text {
+						  font: 10px sans-serif;
+						}
 
-							.axis path,
+						.axis path,
 
 
-							form {
-							  position: absolute;
-							  right: 10px;
-							  top: 10px;
-							}
-						</style>
+						form {
+						  position: absolute;
+						  right: 10px;
+						  top: 10px;
+						}
+					</style>
 
-						<form>
-						  <label><input type="radio" name="mode" value="grouped"> Grouped</label>
-						  <label><input type="radio" name="mode" value="stacked" checked> Stacked</label>
-						</form>
+					<form>
+					  <label><input type="radio" name="mode" value="grouped"> Grouped</label>
+					  <label><input type="radio" name="mode" value="stacked" checked> Stacked</label>
+					</form>
 							
 							
 							
-						<script>
+					<script>
 						var n = 4, // number of layers
 						    m = 58, // number of samples per layer
 						    stack = d3.layout.stack(),
@@ -193,8 +194,8 @@
 						  for (i = 0; i < n; ++i) a[i] = o + o * Math.random();
 						  for (i = 0; i < 5; ++i) bump(a);
 						  return a.map(function(d, i) { return {x: i, y: Math.max(0, d)}; });
-						}			
-						</script>					    
+						}		
+					</script>					    
 				</div>
 			</div>
 		</div>
@@ -202,7 +203,7 @@
 
 
 		<!-- Scripts -->
-			<script src="//d3js.org/d3.v3.min.js"></script>
+			
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrolly.min.js"></script>
 			<script src="assets/js/jquery.dropotron.min.js"></script>
