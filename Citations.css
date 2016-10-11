@@ -8,7 +8,7 @@ html {
 }
 
 body{
-  background:#EFEFEF;
+  background:#e44c65;
     margin:0 auto;
     
     width:100%;
@@ -21,7 +21,7 @@ background: linear-gradient(to right, #FF5F6D , #FFC371); */
 
 
 .navigationbar {
-    background:#FF626D; 
+    background:#272833; 
     position:fixed;
     z-index:50;
     margin-top:0;
