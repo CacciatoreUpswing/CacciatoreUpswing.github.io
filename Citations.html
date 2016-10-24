@@ -1,26 +1,81 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<!--
+  Landed by HTML5 UP
+  html5up.net | @ajlkn
+  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
-    
-    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1">
-    
-    <head>
-        
-        <link rel="stylesheet" href="Citations.css">
-        <link rel="stylesheet_nav" href="main.css">
-        
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-		
-        <script type="text/javascript" src="http://cdn.jsdelivr.net/jquery.mixitup/latest/jquery.mixitup.min.js"></script>
+  <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1">
+  <head>
+    <title>Overview</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 
-    </head>
+    <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+    <link rel="stylesheet" href="Citations.css">
+      <link rel="stylesheet_nav" href="assets/css/main.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="http://cdn.jsdelivr.net/jquery.mixitup/latest/jquery.mixitup.min.js"></script>
+  </head>
+
+  <body>
+    <div id="page-wrapper">
+
+      <!-- Header -->
+      <header id="header">
+        <h1 id="logo"><a href="index.html">Clearlytic</a></h1>
+
+        <nav id="nav">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Citations.html">Database</a></li>
+            <li>
+              <a href="#">What we offer</a>
+              <ul>
+                                <li><a href="overview.html">Overview</a></li>
+                                <li><a href="basicbenchmarking.html">Basic Benchmarking</a></li>
+                                <li><a href="customsolutions.html">Custom Solutions</a></li>
+
+              </ul>
+            </li>
+
+            <li><a href="portal.html" class="button special">Sign Up</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <!-- Main -->
+      <div id="main" class="wrapper style1">
+        <div class="container">
+ 
 
 
-    
-    <script>
-    
-        // MIXITUP SCRIPT
-        
-        // To keep our code clean and modular, all custom functionality will be contained inside a single object literal called "multiFilter".
+
+
+
+
+
+
+
+
+
+       </div>
+
+    <!-- Scripts -->
+      <script src="assets/js/jquery.min.js"></script>
+      <script src="assets/js/jquery.scrolly.min.js"></script>
+      <script src="assets/js/jquery.dropotron.min.js"></script>
+      <script src="assets/js/jquery.scrollex.min.js"></script>
+      <script src="assets/js/skel.min.js"></script>
+      <script src="assets/js/util.js"></script>
+      <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+      <script src="assets/js/main.js"></script>
+
+
+      <!--MORE CITATION SCRIPTS HERE WAKA WAKA -->
+      <script
 
         var multiFilter = {
 
@@ -209,38 +264,94 @@
 
 
 
-        });
-
-
-    </script>
-
-
-  <div id="page-wrapper">
-
-    <!-- Header -->
-    <header id="header">
-      <h1 id="logo"><a href="index.html">Clearlytic</a></h1>
-      <nav id="nav">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <a href="Citations.html">Database</a></li>
-          <li>
-            <a href="#">What we offer</a>
-            <ul>
-                              <li><a href="overview.html">Overview</a></li>
-                              <li><a href="basicbenchmarking.html">Basic Benchmarking</a></li>
-                              <li><a href="customsolutions.html">Custom Solutions</a></li>
-
-            </ul>
-          </li>
-
-          <li><a href="portal.html" class="button special">Sign Up</a></li>
-        </ul>
-      </nav>
-    </header>
-    </div>
+        }); </script>
+            <script type="text/javascript" src="hammer.js"script></script>
+    <script>
     
+    // SWIPING INTERACTION CODE
     
+         function openNav() {
+            document.getElementById("Filters").style.width = "auto";
+            };
+        
+            var swipearea = document.getElementById('swipearea');
+            var swipeareared = document.getElementById('swipeareared');
+            var swipegesture = document.getElementById('swipegesture');
+            var swipegesturered = document.getElementById('swipegesturered');
+            var bodything = document.getElementById('bodything');
+            var filterPanel = document.getElementById('filterPanel');
+            var cardcontainer = document.getElementById('Container');
+            var navbar = document.getElementById('navbar');
+           /* var responsivecontainer = document.getElementById('responsivecontainer');*/
+
+            var mc = new Hammer(filterPanel);
+            var mc2 = new Hammer(bodything);
+            var mc3 = new Hammer (swipearea);
+            var mc4 = new Hammer (swipeareared);
+
+
+            mc3.on("swiperight", function(ev) {
+
+
+                filterPanel.style.webkitTransform ="translateX(0)";
+                /*filters.style.webkitTransition = "width 300ms cubic-bezier(.10, .10, .25, .90)";*/
+                filterPanel.style.webkitTransition = "width 300ms ease";
+                filterPanel.style.width = "100%";
+                cardcontainer.style.visibility = "hidden";
+
+                navbar.style.background = "#FF626D"
+                swipegesture.style.display = "none";
+                bodything.style.maxWidth = "100%";
+
+            });
+
+            mc2.on("swiperight", function(ev) {
+                   filterPanel.style.webkitTransform ="translateX(0)";
+               /* filters.style.webkitTransition = "width 300ms cubic-bezier(.10, .10, .25, .90)";*/
+                filterPanel.style.webkitTransition = "width 300ms ease";
+                filterPanel.style.width = "100%";
+                navbar.style.background = "#FF626D"
+               cardcontainer.style.visibility = "hidden";
+
+                swipegesture.style.display = "none";
+                bodything.style.maxWidth = "100%";
+
+            });
+
+            mc.on("swipeleft", function(ev) {
+                /*filters.style.transitionProperty = "width";
+                filters.style.transitionDuration = "0.5s";*/
+                filterPanel.style.width = "0";
+                cardcontainer.style.visibility = "visible";
+                swipegesturered.style.display = "none";
+                swipeareared.style.height = "auto";
+                navbar.style.background = "-webkit-linear-gradient(to right, #FF626D , #FFC371)" 
+                navbar.style.background = "linear-gradient(to right, #FF626D , #FFC371)" 
+
+                bodything.style.maxWidth = "380px";
+            });
+
+           mc4.on("swipeleft", function(ev) {
+                /*filters.style.transitionProperty = "width";*
+                filters.style.transitionDuration = "0.5s";*/
+                navbar.style.background = "-webkit-linear-gradient(to right, #FF626D , #FFC371);" 
+                navbar.style.background = "linear-gradient(to right, #FF626D , #FFC371);" 
+                filterPanel.style.width = "0";
+                cardcontainer.style.visibility = "visible";
+                swipegesturered.style.display = "none";
+                swipeareared.style.height = "auto";
+               bodything.style.maxWidth = "380px";
+
+            });
+
+
+    
+        </script>
+
+
+
+<!-- Body for citation thing -->
+
 <body id = "bodything">
        
      <div style = "position:relative; height:70px; width:100%;">
@@ -635,93 +746,27 @@
          
         </div>
     
-   </div> 
-        
-        
-    
-    <script type="text/javascript" src="hammer.js"script></script>
-    <script>
-    
-    // SWIPING INTERACTION CODE
-    
-         function openNav() {
-            document.getElementById("Filters").style.width = "auto";
-            };
-        
-            var swipearea = document.getElementById('swipearea');
-            var swipeareared = document.getElementById('swipeareared');
-            var swipegesture = document.getElementById('swipegesture');
-            var swipegesturered = document.getElementById('swipegesturered');
-            var bodything = document.getElementById('bodything');
-            var filterPanel = document.getElementById('filterPanel');
-            var cardcontainer = document.getElementById('Container');
-            var navbar = document.getElementById('navbar');
-           /* var responsivecontainer = document.getElementById('responsivecontainer');*/
+   
 
-            var mc = new Hammer(filterPanel);
-            var mc2 = new Hammer(bodything);
-            var mc3 = new Hammer (swipearea);
-            var mc4 = new Hammer (swipeareared);
+      <!-- Footer -->
+      <footer id="footer">
+        <ul class="icons">
+          <li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
+          <li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
+          <li><a href="#" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+          <li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
+          <li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
+          <li><a href="#" class="icon alt fa-envelope"><span class="label">Email</span></a></li>
+        </ul>
+        <ul class="copyright">
+          <li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+      </footer>
 
+    </div> 
 
-            mc3.on("swiperight", function(ev) {
-
-
-                filterPanel.style.webkitTransform ="translateX(0)";
-                /*filters.style.webkitTransition = "width 300ms cubic-bezier(.10, .10, .25, .90)";*/
-                filterPanel.style.webkitTransition = "width 300ms ease";
-                filterPanel.style.width = "100%";
-                cardcontainer.style.visibility = "hidden";
-
-                navbar.style.background = "#FF626D"
-                swipegesture.style.display = "none";
-                bodything.style.maxWidth = "100%";
-
-            });
-
-            mc2.on("swiperight", function(ev) {
-                   filterPanel.style.webkitTransform ="translateX(0)";
-               /* filters.style.webkitTransition = "width 300ms cubic-bezier(.10, .10, .25, .90)";*/
-                filterPanel.style.webkitTransition = "width 300ms ease";
-                filterPanel.style.width = "100%";
-                navbar.style.background = "#FF626D"
-               cardcontainer.style.visibility = "hidden";
-
-                swipegesture.style.display = "none";
-                bodything.style.maxWidth = "100%";
-
-            });
-
-            mc.on("swipeleft", function(ev) {
-                /*filters.style.transitionProperty = "width";
-                filters.style.transitionDuration = "0.5s";*/
-                filterPanel.style.width = "0";
-                cardcontainer.style.visibility = "visible";
-                swipegesturered.style.display = "none";
-                swipeareared.style.height = "auto";
-                navbar.style.background = "-webkit-linear-gradient(to right, #FF626D , #FFC371)" 
-                navbar.style.background = "linear-gradient(to right, #FF626D , #FFC371)" 
-
-                bodything.style.maxWidth = "380px";
-            });
-
-           mc4.on("swipeleft", function(ev) {
-                /*filters.style.transitionProperty = "width";*
-                filters.style.transitionDuration = "0.5s";*/
-                navbar.style.background = "-webkit-linear-gradient(to right, #FF626D , #FFC371);" 
-                navbar.style.background = "linear-gradient(to right, #FF626D , #FFC371);" 
-                filterPanel.style.width = "0";
-                cardcontainer.style.visibility = "visible";
-                swipegesturered.style.display = "none";
-                swipeareared.style.height = "auto";
-               bodything.style.maxWidth = "380px";
-
-            });
-
-
-    
-        </script>
-    
-    </body>
-    
+  </body>
 </html>
+
+
+
