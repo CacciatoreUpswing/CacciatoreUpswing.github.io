@@ -20,21 +20,7 @@ background: linear-gradient(to right, #FF5F6D , #FFC371); */
 }
 
 
-.navigationbar {
-    background:#FF626D; 
-    position:fixed;
-    z-index:50;
-    margin-top:0;
-    height:70px;
-    /*background-color: #FF626D*/
-    box-shadow: -3px 2px 5px rgba(0,0,0,0.20);
-    overflow: visible;
-    /*margin:0 auto;*/
-    padding:0;
-    top:0;
-    left:0;
-    width:100%;
-}
+
 
 #swipearea {
     display:none;
