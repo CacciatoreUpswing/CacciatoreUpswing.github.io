@@ -902,6 +902,11 @@ h1 {
       border-bottom-color: transparent;
     }
 
+    h1 a {
+      color: inherit;
+      border: 0;
+    }
+
 
 
 
