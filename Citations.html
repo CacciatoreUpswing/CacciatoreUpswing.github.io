@@ -1,680 +1,697 @@
-
-<!DOCTYPE HTML>
-<!--
-  Landed by HTML5 UP
-  html5up.net | @ajlkn
-  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+<!DOCTYPE html>
 <html>
-	<head>
-		<title>Database</title>
-		<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1">
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+    
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1">
+    
+    <head>
+        
+        <link rel="stylesheet" href="Citations.css">
+        
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 		
-		<link rel="stylesheet" href="Citations.css">
-		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-		<script type="text/javascript" src="http://cdn.jsdelivr.net/jquery.mixitup/latest/jquery.mixitup.min.js"></script>
-	</head>
-
-	<body>
-	   
-
-	  <!-- Header -->
-	  <header id="header">
-		<h1 id="logo"><a href="index.html">Clearlytic</a></h1>
-
-		<nav id="nav">
-		  <ul>
-			<li><a href="index.html">Home</a></li>
-			<li><a href="Citations.html">Database</a></li>
-			<li>
-			  <a href="#">What we offer</a>
-			  <ul>
-								<li><a href="overview.html">Overview</a></li>
-								<li><a href="basicbenchmarking.html">Basic Benchmarking</a></li>
-								<li><a href="customsolutions.html">Custom Solutions</a></li>
-
-			  </ul>
-			</li>
-
-			<li><a href="portal.html" class="button special">Sign Up</a></li>
-		  </ul>
-		</nav>
-	  </header>
-
-	  <!-- Main -->
-	  <div id="main" class="wrapper style1">
-
-				 
-
-								<!-- Scripts -->
-								  <script src="assets/js/jquery.min.js"></script>
-								  <script src="assets/js/jquery.scrolly.min.js"></script>
-								  <script src="assets/js/jquery.dropotron.min.js"></script>
-								  <script src="assets/js/jquery.scrollex.min.js"></script>
-								  <script src="assets/js/skel.min.js"></script>
-								  <script src="assets/js/util.js"></script>
-								  <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-								  <script src="assets/js/main.js"></script>
-
-								  <script>
-
-									var multiFilter = {
-
-									  // Declare any variables we will need as properties of the object
-
-									  $filterGroups: null,
-									  $filterUi: null,
-									  $reset: null,
-									  groups: [],
-									  outputArray: [],
-									  outputString: '',
-
-									  // The "init" method will run on document ready and cache any jQuery objects we will need.
-							  
-									  init: function(){
-										var self = this; // As a best practice, in each method we will asign "this" to the variable "self" so that it remains scope-agnostic. We will use it to refer to the parent "checkboxFilter" object so that we can share methods and properties between all parts of the object.
-
-										self.$filterUi = $('#Filters');
-										self.$filterGroups = $('.filter-group');
-										self.$reset = $('#Reset');
-										self.$container = $('#Container');
-
-										self.$filterGroups.each(function(){
-										  self.groups.push({
-											$inputs: $(this).find('input'),
-											active: [],
-												tracker: false
-										  });
-										});
-
-										self.bindHandlers();
-									  },
-
-									  // The "bindHandlers" method will listen for whenever a form value changes. 
-
-									  bindHandlers: function(){
-										var self = this,
-											typingDelay = 300,
-											typingTimeout = -1,
-											resetTimer = function() {
-											  clearTimeout(typingTimeout);
-
-											  typingTimeout = setTimeout(function() {
-												self.parseFilters();
-											  }, typingDelay);
-											};
-
-										self.$filterGroups
-										  .filter('.checkboxes')
-											.on('change', function() {
-											self.parseFilters();
-											});
-
-										self.$filterGroups
-										  .filter('.search')
-										  .on('keyup change', resetTimer);
-
-										self.$reset.on('click', function(e){
-										  e.preventDefault();
-										  self.$filterUi[0].reset();
-										  self.$filterUi.find('input[type="text"]').val('');
-										  self.parseFilters();
-										});
-									  },
-
-									  // The parseFilters method checks which filters are active in each group:
-
-									  parseFilters: function(){
-										var self = this;
-
-										// loop through each filter group and add active filters to arrays
-
-										for(var i = 0, group; group = self.groups[i]; i++){
-										  group.active = []; // reset arrays
-										  group.$inputs.each(function(){
-											var searchTerm = '',
-													$input = $(this),
-												minimumLength = 3;
-
-											if ($input.is(':checked')) {
-											  group.active.push(this.value);
-											}
-
-											if ($input.is('[type="text"]') && this.value.length >= minimumLength) {
-											  searchTerm = this.value
-												.trim()
-												.toLowerCase()
-												.replace(' ', '-');
+        <script type="text/javascript" src="http://cdn.jsdelivr.net/jquery.mixitup/latest/jquery.mixitup.min.js"></script>
+       
+    </head>
+    
+    <script>
+    
+        // MIXITUP SCRIPT
+        
+        // To keep our code clean and modular, all custom functionality will be contained inside a single object literal called "multiFilter".
+
+        var multiFilter = {
+
+          // Declare any variables we will need as properties of the object
+
+          $filterGroups: null,
+          $filterUi: null,
+          $reset: null,
+          groups: [],
+          outputArray: [],
+          outputString: '',
+
+          // The "init" method will run on document ready and cache any jQuery objects we will need.
+  
+          init: function(){
+            var self = this; // As a best practice, in each method we will asign "this" to the variable "self" so that it remains scope-agnostic. We will use it to refer to the parent "checkboxFilter" object so that we can share methods and properties between all parts of the object.
+
+            self.$filterUi = $('#Filters');
+            self.$filterGroups = $('.filter-group');
+            self.$reset = $('#Reset');
+            self.$container = $('#Container');
+
+            self.$filterGroups.each(function(){
+              self.groups.push({
+                $inputs: $(this).find('input'),
+                active: [],
+                    tracker: false
+              });
+            });
+
+            self.bindHandlers();
+          },
+
+          // The "bindHandlers" method will listen for whenever a form value changes. 
+
+          bindHandlers: function(){
+            var self = this,
+                typingDelay = 300,
+                typingTimeout = -1,
+                resetTimer = function() {
+                  clearTimeout(typingTimeout);
+
+                  typingTimeout = setTimeout(function() {
+                    self.parseFilters();
+                  }, typingDelay);
+                };
+
+            self.$filterGroups
+              .filter('.checkboxes')
+                .on('change', function() {
+                self.parseFilters();
+                });
+
+            self.$filterGroups
+              .filter('.search')
+              .on('keyup change', resetTimer);
+
+            self.$reset.on('click', function(e){
+              e.preventDefault();
+              self.$filterUi[0].reset();
+              self.$filterUi.find('input[type="text"]').val('');
+              self.parseFilters();
+            });
+          },
+
+          // The parseFilters method checks which filters are active in each group:
+
+          parseFilters: function(){
+            var self = this;
+
+            // loop through each filter group and add active filters to arrays
+
+            for(var i = 0, group; group = self.groups[i]; i++){
+              group.active = []; // reset arrays
+              group.$inputs.each(function(){
+                var searchTerm = '',
+                        $input = $(this),
+                    minimumLength = 3;
+
+                if ($input.is(':checked')) {
+                  group.active.push(this.value);
+                }
+
+                if ($input.is('[type="text"]') && this.value.length >= minimumLength) {
+                  searchTerm = this.value
+                    .trim()
+                    .toLowerCase()
+                    .replace(' ', '-');
+
+                  group.active[0] = '[class*="' + searchTerm + '"]'; 
+                }
+              });
+                group.active.length && (group.tracker = 0);
+            }
 
-											  group.active[0] = '[class*="' + searchTerm + '"]'; 
-											}
-										  });
-											group.active.length && (group.tracker = 0);
-										}
+            self.concatenate();
+          },
 
-										self.concatenate();
-									  },
+          // The "concatenate" method will crawl through each group, concatenating filters as desired:
 
-									  // The "concatenate" method will crawl through each group, concatenating filters as desired:
-
-									  concatenate: function(){
-										var self = this,
-											  cache = '',
-											  crawled = false,
-											  checkTrackers = function(){
-											var done = 0;
-
-											for(var i = 0, group; group = self.groups[i]; i++){
-											  (group.tracker === false) && done++;
-											}
-
-											return (done < self.groups.length);
-										  },
-										  crawl = function(){
-											for(var i = 0, group; group = self.groups[i]; i++){
-											  group.active[group.tracker] && (cache += group.active[group.tracker]);
-
-											  if(i === self.groups.length - 1){
-												self.outputArray.push(cache);
-												cache = '';
-												updateTrackers();
-											  }
-											}
-										  },
-										  updateTrackers = function(){
-											for(var i = self.groups.length - 1; i > -1; i--){
-											  var group = self.groups[i];
-
-											  if(group.active[group.tracker + 1]){
-												group.tracker++; 
-												break;
-											  } else if(i > 0){
-												group.tracker && (group.tracker = 0);
-											  } else {
-												crawled = true;
-											  }
-											}
-										  };
-
-										self.outputArray = []; // reset output array
-
-										  do{
-											  crawl();
-										  }
-										  while(!crawled && checkTrackers());
-
-										self.outputString = self.outputArray.join();
-
-										// If the output string is empty, show all rather than none:
-
-										!self.outputString.length && (self.outputString = 'all'); 
-
-										console.log(self.outputString); 
-
-										// ^ we can check the console here to take a look at the filter string that is produced
-
-										// Send the output string to MixItUp via the 'filter' method:
-
-										  if(self.$container.mixItUp('isLoaded')){
-											self.$container.mixItUp('filter', self.outputString);
-										  }
-									  }
-									};
-
-									// On document ready, initialise our code.
-
-									$(function(){
-
-									  // Initialize multiFilter code
-
-									  multiFilter.init();
-
-									  // Instantiate MixItUp
-
-									  $('#Container').mixItUp({
-										controls: {   
-										   enable: false // we won't be needing these
-										},
-										animation: {
-										  easing: 'cubic-bezier(0.86, 0, 0.07, 1)',
-										  queueLimit: 3,
-										  duration: 300
-										}
-									  });    
-
-
-
-
-									}); 
-
-								</script>
-							
-				   
-
-
-
-				<!-- Body for citation thing -->
-
-				<body id = "bodything">
-					   
-					 <div style = "position:relative; height:70px; width:100%;">
-					   
-						 <div id = "navbar" class = "navigationbar">
-							 <button class = "filterButton" id="Reset">Clear Filters</button>
-							 
-							 <iframe src = "Logo.html" class = "logo" seamless></iframe></div> 
-						</div>
-
-					  
-					
-					<div class = "responsivecontainerleft" id = "filterPanel" >
-					 
-						<!-- CONTAINER FOR FILTERS -->  
-						
-						<form class="controls"   id="Filters">
-							
-							<!-- SWIPING ANIMATION -->
-							
-							<div id = "swipeareared" class=""><span>Swipe left to close the filter panel.</span><br> <iframe id = "swipegesturered"  src="Swiping%20Animation%20-%20Left.html" 
-					 scrolling="no" seamless></iframe>
-							</div>  
-
-							<!-- <fieldset class="filter-group search" style = "width:100%;  float:none; text-align:center; margin-top:5px;box-sizing:border-box" >
-							<h4>Search</h4>
-							<input class = "input1" type="text" placeholder=" . . ."/>
-							<button id="Reset">Clear Filters</button>
-							</fieldset> -->
-
-						
-						  <fieldset class="filter-group checkboxes">
-							<h4>Style</h4>
-							<div class="checkbox">
-							  <input type="checkbox" value=".mla"/>
-							  <label>MLA</label>
-							</div>
-							<div class="checkbox">
-							  <input type="checkbox" value=".apa"/>
-							  <label>APA</label>
-							</div>
-							<div class="checkbox">
-							  <input type="checkbox" value=".chicago"/>
-							  <label>Chicago</label>
-							</div>
-						  </fieldset>
-						
-					 
-				  
-						  <fieldset class="filter-group checkboxes">
-							<h4>Medium</h4>
-							<div class="checkbox">
-							  <input type="checkbox" value=".print"/>
-							  <label>Printed</label>
-							</div>
-							<div class="checkbox">
-							  <input type="checkbox" value=".digital"/>
-							  <label>Digital</label>
-							</div>
-							<div class="checkbox">
-							  <input type="checkbox" value=".other"/>
-							  <label>Other</label>
-							</div>  
-					
-							</fieldset>
-				 
-
-						<!-- SOURCE TYPE CONT'D-->                
-
-						  <fieldset class="filter-group checkboxes">
-
-							<h4>Source Type</h4>
-
-							  <div class="checkbox">
-								<input type="checkbox" value=".article"/>
-								<label>Article</label>
-							  </div>  
-
-							  <div class="checkbox">
-								<input type="checkbox" value=".book"/>
-								<label>Book</label>
-							  </div>
-
-							  <div class="checkbox">
-								<input type="checkbox" value=".edition"/>
-								<label>Book (edition)</label>
-							  </div>
-
-							  <div class="checkbox">
-								<input type="checkbox" value=".republished"/>
-								<label>Book (republished)</label>
-							  </div>
-
-							  <div class="checkbox">
-								<input type="checkbox" value=".editor"/>
-								<label>Book (with editor)</label>
-							  </div>
-
-							  <div class="checkbox">
-								<input type="checkbox" value=".editorial"/>
-								<label>Editorial</label>
-							  </div>
-
-							  <div class="checkbox">
-								<input type="checkbox" value=".email"/>
-								<label>Email</label>  
-							  </div>
-
-							  <div class="checkbox">
-								<input type="checkbox" value=".entry"/>
-								<label>Entry</label>  
-							  </div>
-
-							  <div class="checkbox">
-								<input type="checkbox" value=".essay"/>
-								<label>Essay</label>  
-							  </div>
-
-							   <div class="checkbox">
-								<input type="checkbox" value=".file"/>
-								<label>File</label>  
-							  </div>
-
-							  <div class="checkbox">
-								<input type="checkbox" value=".film"/>
-								<label>Film</label>  
-							  </div>
-
-						</fieldset>    
-
-						<!-- SOURCE TYPE CONT'D-->        
-
-						<fieldset class="filter-group checkboxes">
-
-							<h4>Source Type (cont'd)</h4>
-
-							  <div class="checkbox">
-								<input type="checkbox" value=".government"/>
-								<label>Government Publication</label>  
-							  </div>
-
-							 <div class="checkbox">
-								<input type="checkbox" value=".image"/>
-								<label>Image</label>  
-							  </div>
-
-							<div class="checkbox">
-								<input type="checkbox" value=".interview"/>
-								<label>Interview</label>  
-							  </div>
-
-							  <div class="checkbox">
-								<input type="checkbox" value=".painting"/>
-								<label>Painting</label>  
-							  </div> 
-
-										  <div class="checkbox">
-								<input type="checkbox" value=".photo"/>
-								<label>Photograph</label>  
-							  </div>
-
-							 <div class="checkbox">
-								<input type="checkbox" value=".poem"/>
-								<label>Poem</label>  
-							  </div>
-
-							  <div class="checkbox">
-								<input type="checkbox" value=".shortstory"/>
-								<label>Short Story</label>  
-							  </div>
-
-							 <div class="checkbox">
-								<input type="checkbox" value=".video"/>
-								<label>Video</label>  
-							  </div>
-
-							  <div class="checkbox">
-								<input type="checkbox" value=".webpage"/>
-								<label>Webpage</label>  
-							  </div>
-
-							  <div class="checkbox">
-								<input type="checkbox" value=".website"/>
-								<label>Website</label>  
-							  </div>
-
-
-							</fieldset>
-
-							<!-- AUTHORS -->
-
-								<fieldset class="filter-group checkboxes">
-
-								<h4>Author(s)</h4>
-
-								<div class="checkbox">
-									<input type="checkbox" value=".oneauthor"/>
-									<label>1</label>
-								</div>
-
-								<div class="checkbox">
-									<input type="checkbox" value=".twoauthors"/>
-									<label>2</label>
-								</div>
-
-								<div class="checkbox">
-									<input type="checkbox" value=".morethantwoauthors"/>
-									<label>3+</label>
-								</div>
-
-
-
-								<div class="checkbox">
-									<input type="checkbox" value=".editor"/>
-									<label>Editor</label>
-								</div>
-
-								<div class="checkbox">
-									<input type="checkbox" value=".organization"/>
-									<label>Organization</label>
-								</div>
-
-								<div class="checkbox">
-									<input type="checkbox" value=".same"/>
-									<label>Same</label>
-								</div>
-
-
-								<div class="checkbox">
-									<input type="checkbox" value=".unknown"/>
-									<label>Unknown</label>
-								</div>
-
-							</fieldset>
-
-							
-							<!-- LOCATION -->
-							
-							<fieldset class="filter-group checkboxes">
-
-								<h4>Location</h4>
-
-									<div class="checkbox">
-										<input type="checkbox" value=".anthology"/>
-										<label>Anthology</label>
-									</div>
-
-									<div class="checkbox">
-											<input type="checkbox" value=".collection"/>
-											<label>Collection</label>
-										</div>
-
-									<div class="checkbox">
-											<input type="checkbox" value=".database"/>
-											<label>Database</label>
-										</div>
-
-									<div class="checkbox">
-											<input type="checkbox" value=".dictionary"/>
-											<label>Dictionary</label>
-										</div>
-
-									<div class="checkbox">
-											<input type="checkbox" value=".magazine"/>
-											<label>Magazine</label>
-										</div>
-
-									<div class="checkbox">
-											<input type="checkbox" value=".newspaper"/>
-											<label>Newspaper</label>
-										</div>
-
-
-									  <div class="checkbox">
-											<input type="checkbox" value=".onlinedatabase"/>
-											<label>Online Database</label>
-										</div>
-
-									<div class="checkbox">
-											<input type="checkbox" value=".onlinemagazine"/>
-											<label>Online Magazine</label>
-										</div>
-
-									<div class="checkbox">
-											<input type="checkbox" value=".onlinescholarlyjournal"/>
-											<label>Online Scholarly Journal</label>
-										</div>
-
-									<div class="checkbox">
-											<input type="checkbox" value=".scholarlyjournal"/>
-											<label>Scholarly Journal</label>
-										</div>
-
-									<div class="checkbox">
-											<input type="checkbox" value=".websitelocation"/>
-											<label>Website</label>
-										</div>
-
-							</fieldset>    
-				  
-						</form>
-
-					</div>
-						
-					
-					<div class = "responsivecontainerright" id="Container">
-					
-						<!-- SWIPING ANIMATION --> 
-						
-						<div id = "swipearea"><span class = "swipeinstructions">Swipe right to open the filter panel.</span>
-							<iframe id = "swipegesture" width="195px" height="170px" class = "animation" src="Swiping%20Animation.html" 
-						 scrolling="none" seamless></iframe>
-								</div>
-
-						<!-- CONTAINER FOR CARDS -->
-						<div  class="container">
-
-							<div class="fail-message"><span style = "color:#FF626D; font-family:'Helvetica Neue'; font-weight:300;">We couldn't find any items matching the selected filters.</span>
-							</div>
-
-						   
-							<!-- MLA CARDS -->
-
-							<div class = "card mix mla book oneauthor one author print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>Book with One Author</h5><p>Last Name, First Name. <span class = "italics">Title of Book.</span> Publisher, Publication Year.</p>
-							</div>
-
-							<div class = "card mix mla book oneauthor one author print add" style = "z-index:20"><a href = "http://www.upswing.io" ><img src="Ad.svg" class = "MLApocket"></a><h5>This is an Ad.</h5><p><a href="http://www.data.com">Amazing Data Report.</a> <span class = "italics">More advertisement.</span> More advertisement.</p>
-							</div>
-
-							<div class = "card mix mla book twoauthors two author print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>Book with Two Authors</h5><p>Last Name, First Name, and First Name of Second Author Last Name of Second Author. <span class = "italics">Title of Book.</span> Publisher, Publication Year.</p>
-							</div>
-
-
-							<div class = "card mix mla book morethantwoauthors more three print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>Book with More Than Two Authors</h5><p>Last Name of First Author, First Name of First Author, et al. <span class = "italics">Title of Book.</span> Publisher, Publication Year.</p>
-							</div>
-
-
-							<div class = "card mix mla book same author print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>Books with the Same Author</h5><p>Last Name, First Name. <span class = "italics">Title of Book That Comes First Alphabetically.</span> Publisher, Publication Date.</p><p style = "margin-top:-70px">--. <span class = "italics">Title of Book That Comes Second Alphabetically.</span> Publisher, Publication Year.</p>    
-							</div>
-
-							<div class = "card mix mla book unknown no anonymous print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>Book with No Author</h5><p><span class = "italics">Title of Book.</span> Publisher, Publication Year.</p><notes class = "notes">*Treat authorless entries like any other entry and arrange them alphabetically.</notes>
-							</div>
-
-							<div class = "card mix mla book editor print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>Book Prepared by an Editor</h5><p><span class = "italics">Title of Book.</span> Edited by First Name of Editor Last Name of Editor, Publisher, Publication Year.</p>
-							</div>
-
-							 <div class = "card mix mla book editor print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>Book Prepared by Two Editors</h5><p><span class = "italics">Title of Book.</span> Edited by First Name of First Editor Last Name of First Editor and First Name of Second Editor Last Name of Second Editor, Publisher, Publication Year.</p>
-							</div>
-
-							<div class = "card mix mla book edition print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>Edition of a Book</h5><p><span class = "italics">Title of Book.</span> *Edition Number ed., Publisher, Publication Year.</p><notes class = "notes">*For example: 3rd ed.</notes>
-							</div>
-
-							<div class = "card mix mla book corporation organization print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>Book by Corporation or Organization</h5><p>Name of Corporation or Organization. <span class = "italics">Title of Book.</span> Edited by First Name of Editor Last Name of Editor, Publisher, Publication Year.</p><notes class = "notes">*If the author and publishers are the same, list only the title followed by the publisher's name.</notes>
-							</div>
-
-							<div class = "card mix mla book republished print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>Republished Book</h5><p>Last Name, First Name. <span class = "italics">Title of Book.</span> Original Publication Year. Publisher, Publication Year.</p>
-							</div>
-
-							<div class = "card mix mla entry anthology print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>Entry in an Anthology</h5><p>Last Name of Author, First Name of Author. "Title of Entry." <span class = "italics">Title of Anthology,</span> edited by Editor's First Name Editor's Last Name, Publisher, Publication Year, *Page range of entry.</p><notes class = "notes">*For example: pp. 173-178.</notes>
-							</div>
-
-							<div class = "card mix mla entry collection print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>Entry in a Collection</h5><p>Last Name of Author, First Name of Author. "Title of Entry." <span class = "italics">Title of Collection. </span>Publisher, Publication Year, *Page range of entry.</p><notes class = "notes">*For example: pp. 173-178.</notes>
-							</div>
-
-							<div class = "card mix mla shortstory anthology print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>A Short Story in an Anthology</h5><p>Last Name of Author, First Name of Author. "Title of Short Story."<span class = "italics">Title of Anthology,</span> edited by Editor's First Name Editor's Last Name, Publisher, Publication Year, *Page range of entry.</p><notes class = "notes" style = "margin-top:10px;">*For example: pp. 173-178.</notes>
-							</div>
-
-							<div class = "card mix mla shortstory collection print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>A Short Story in a Collection</h5><p>Last Name of Author, First Name of Author. "Title of Short Story."<span class = "italics">Title of Collection. </span>Publisher, Publication Year, *Page range of entry.</p><br><notes class = "notes" style = "margin-left:10px"><br>*For example: pp. 173-178.<br>**In a collection, all the works have the same author. In an anthology, the works of different authors are collected.</notes>
-							</div>
-
-
-							<div class = "card mix mla essay anthology print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>An Essay in an Anthology</h5><p>Last Name of Author, First Name of Author. "Title of Essay."<span class = "italics">Title of Anthology,</span> edited by Editor's First Name Editor's Last Name, Publisher, Publication Year, *Page range of entry.</p><notes class = "notes" style = "margin-top:10px;">*For example: pp. 173-178.</notes>
-							</div>
-
-
-							<div class = "card mix mla essay collection print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>An Essay in a Collection</h5><p>Last Name of Author, First Name of Author. "Title of Essay."<span class = "italics">Title of Collection. </span>Publisher, Publication Year, *Page range of entry.</p><notes class = "notes"><br>*For example: pp. 173-178.<br>**In a collection, all the works have the same author. In an anthology, the works of different authors are collected.</notes>
-							</div>
-
-							<div class = "card mix mla poem anthology print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>A Poem in an Anthology</h5><p>Last Name of Poet, First Name of Poet. "Title of Essay."<span class = "italics">Title of Anthology,</span> edited by Editor's First Name Editor's Last Name, Publisher, Publication Year, *Page range of entry.<notes class = "notes" style = "margin-top:10px;">*For example: pp. 173-178.</notes></p>
-							</div>
-
-							<div class = "card mix mla poem collection print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>A Poem in a Collection</h5><p>Last Name of Poet, First Name of Poet. "Title of Poem."<span class = "italics">Title of Collection. </span>Publisher, Publication Year, *Page range of entry.</p><notes class = "notes" style = "margin-top:-6px;"><br>*For example: pp. 173-178.<br>**In a collection, all the works have the same author. In an anthology, the works of different authors are collected.</notes>
-							</div>
-
-					
-							<!-- APA CARDS -->
-
-							<div class="card mix apa book print oneauthor one author"><img src="APA%20Pocket.svg" class = "APApocket"><h5>Book with One Author</h5><p>Author, A. A. (Year of publication). <span class = "italics">Title of work: Capital letter also for subtitle.</span> Location: Publisher.</p></div>
-
-							<div class = "card mix apa book twoauthors two authors print"><img src="APA%20Pocket.svg" class = "APApocket"><h5>Book with Two Authors</h5><p>Author Last Name, A. A., & Author Last Name, B.B. (Year of publication). <span class = "italics">Title of work: Capital letter also for subtitle.</span> Location: Publisher.</p></div>
-						</div>
-					  </div>
-				   
-
-					  <!-- Footer -->
-					  <footer id="footer">
-						<ul class="icons">
-						  <li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
-						  <li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
-						  <li><a href="#" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
-						  <li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
-						  <li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
-						  <li><a href="#" class="icon alt fa-envelope"><span class="label">Email</span></a></li>
-						</ul>
-						<ul class="copyright">
-						  <li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-						</ul>
-					  </footer>
-
-					</div> 
-				</div>
-
-  </body>
+          concatenate: function(){
+            var self = this,
+                  cache = '',
+                  crawled = false,
+                  checkTrackers = function(){
+                var done = 0;
+
+                for(var i = 0, group; group = self.groups[i]; i++){
+                  (group.tracker === false) && done++;
+                }
+
+                return (done < self.groups.length);
+              },
+              crawl = function(){
+                for(var i = 0, group; group = self.groups[i]; i++){
+                  group.active[group.tracker] && (cache += group.active[group.tracker]);
+
+                  if(i === self.groups.length - 1){
+                    self.outputArray.push(cache);
+                    cache = '';
+                    updateTrackers();
+                  }
+                }
+              },
+              updateTrackers = function(){
+                for(var i = self.groups.length - 1; i > -1; i--){
+                  var group = self.groups[i];
+
+                  if(group.active[group.tracker + 1]){
+                    group.tracker++; 
+                    break;
+                  } else if(i > 0){
+                    group.tracker && (group.tracker = 0);
+                  } else {
+                    crawled = true;
+                  }
+                }
+              };
+
+            self.outputArray = []; // reset output array
+
+              do{
+                  crawl();
+              }
+              while(!crawled && checkTrackers());
+
+            self.outputString = self.outputArray.join();
+
+            // If the output string is empty, show all rather than none:
+
+            !self.outputString.length && (self.outputString = 'all'); 
+
+            console.log(self.outputString); 
+
+            // ^ we can check the console here to take a look at the filter string that is produced
+
+            // Send the output string to MixItUp via the 'filter' method:
+
+              if(self.$container.mixItUp('isLoaded')){
+                self.$container.mixItUp('filter', self.outputString);
+              }
+          }
+        };
+
+        // On document ready, initialise our code.
+
+        $(function(){
+
+          // Initialize multiFilter code
+
+          multiFilter.init();
+
+          // Instantiate MixItUp
+
+          $('#Container').mixItUp({
+            controls: {   
+               enable: false // we won't be needing these
+            },
+            animation: {
+              easing: 'cubic-bezier(0.86, 0, 0.07, 1)',
+              queueLimit: 3,
+              duration: 300
+            }
+          });    
+
+
+
+
+        });
+
+
+    </script>
+    
+    
+    <body id = "bodything">
+       
+     <div style = "position:relative; height:70px; width:100%;">
+       
+         <div id = "navbar" class = "navigationbar">
+             <button class = "filterButton" id="Reset">Clear Filters</button>
+             
+             <iframe src = "Logo.html" class = "logo" seamless></iframe></div> 
+        </div>
+      
+    
+    <div class = "responsivecontainerleft" id = "filterPanel" >
+     
+        <!-- CONTAINER FOR FILTERS -->  
+        
+        <form class="controls"   id="Filters">
+            
+            <!-- SWIPING ANIMATION -->
+            
+            <div id = "swipeareared" class=""><span>Swipe left to close the filter panel.</span><br> <iframe id = "swipegesturered"  src="Swiping%20Animation%20-%20Left.html" 
+     scrolling="no" seamless></iframe>
+            </div>  
+
+            <!-- <fieldset class="filter-group search" style = "width:100%;  float:none; text-align:center; margin-top:5px;box-sizing:border-box" >
+            <h4>Search</h4>
+            <input class = "input1" type="text" placeholder=" . . ."/>
+            <button id="Reset">Clear Filters</button>
+            </fieldset> -->
+
+        
+          <fieldset class="filter-group checkboxes">
+            <h4>Style</h4>
+            <div class="checkbox">
+              <input type="checkbox" value=".mla"/>
+              <label>MLA</label>
+            </div>
+            <div class="checkbox">
+              <input type="checkbox" value=".apa"/>
+              <label>APA</label>
+            </div>
+            <div class="checkbox">
+              <input type="checkbox" value=".chicago"/>
+              <label>Chicago</label>
+            </div>
+          </fieldset>
+        
+     
+  
+          <fieldset class="filter-group checkboxes">
+            <h4>Medium</h4>
+            <div class="checkbox">
+              <input type="checkbox" value=".print"/>
+              <label>Printed</label>
+            </div>
+            <div class="checkbox">
+              <input type="checkbox" value=".digital"/>
+              <label>Digital</label>
+            </div>
+            <div class="checkbox">
+              <input type="checkbox" value=".other"/>
+              <label>Other</label>
+            </div>  
+    
+            </fieldset>
+ 
+
+        <!-- SOURCE TYPE CONT'D-->                
+
+          <fieldset class="filter-group checkboxes">
+
+            <h4>Source Type</h4>
+
+              <div class="checkbox">
+                <input type="checkbox" value=".article"/>
+                <label>Article</label>
+              </div>  
+
+              <div class="checkbox">
+                <input type="checkbox" value=".book"/>
+                <label>Book</label>
+              </div>
+
+              <div class="checkbox">
+                <input type="checkbox" value=".edition"/>
+                <label>Book (edition)</label>
+              </div>
+
+              <div class="checkbox">
+                <input type="checkbox" value=".republished"/>
+                <label>Book (republished)</label>
+              </div>
+
+              <div class="checkbox">
+                <input type="checkbox" value=".editor"/>
+                <label>Book (with editor)</label>
+              </div>
+
+              <div class="checkbox">
+                <input type="checkbox" value=".editorial"/>
+                <label>Editorial</label>
+              </div>
+
+              <div class="checkbox">
+                <input type="checkbox" value=".email"/>
+                <label>Email</label>  
+              </div>
+
+              <div class="checkbox">
+                <input type="checkbox" value=".entry"/>
+                <label>Entry</label>  
+              </div>
+
+              <div class="checkbox">
+                <input type="checkbox" value=".essay"/>
+                <label>Essay</label>  
+              </div>
+
+               <div class="checkbox">
+                <input type="checkbox" value=".file"/>
+                <label>File</label>  
+              </div>
+
+              <div class="checkbox">
+                <input type="checkbox" value=".film"/>
+                <label>Film</label>  
+              </div>
+
+        </fieldset>    
+
+        <!-- SOURCE TYPE CONT'D-->        
+
+        <fieldset class="filter-group checkboxes">
+
+            <h4>Source Type (cont'd)</h4>
+
+              <div class="checkbox">
+                <input type="checkbox" value=".government"/>
+                <label>Government Publication</label>  
+              </div>
+
+             <div class="checkbox">
+                <input type="checkbox" value=".image"/>
+                <label>Image</label>  
+              </div>
+
+            <div class="checkbox">
+                <input type="checkbox" value=".interview"/>
+                <label>Interview</label>  
+              </div>
+
+              <div class="checkbox">
+                <input type="checkbox" value=".painting"/>
+                <label>Painting</label>  
+              </div> 
+
+                          <div class="checkbox">
+                <input type="checkbox" value=".photo"/>
+                <label>Photograph</label>  
+              </div>
+
+             <div class="checkbox">
+                <input type="checkbox" value=".poem"/>
+                <label>Poem</label>  
+              </div>
+
+              <div class="checkbox">
+                <input type="checkbox" value=".shortstory"/>
+                <label>Short Story</label>  
+              </div>
+
+             <div class="checkbox">
+                <input type="checkbox" value=".video"/>
+                <label>Video</label>  
+              </div>
+
+              <div class="checkbox">
+                <input type="checkbox" value=".webpage"/>
+                <label>Webpage</label>  
+              </div>
+
+              <div class="checkbox">
+                <input type="checkbox" value=".website"/>
+                <label>Website</label>  
+              </div>
+
+
+            </fieldset>
+
+            <!-- AUTHORS -->
+
+                <fieldset class="filter-group checkboxes">
+
+                <h4>Author(s)</h4>
+
+                <div class="checkbox">
+                    <input type="checkbox" value=".oneauthor"/>
+                    <label>1</label>
+                </div>
+
+                <div class="checkbox">
+                    <input type="checkbox" value=".twoauthors"/>
+                    <label>2</label>
+                </div>
+
+                <div class="checkbox">
+                    <input type="checkbox" value=".morethantwoauthors"/>
+                    <label>3+</label>
+                </div>
+
+
+
+                <div class="checkbox">
+                    <input type="checkbox" value=".editor"/>
+                    <label>Editor</label>
+                </div>
+
+                <div class="checkbox">
+                    <input type="checkbox" value=".organization"/>
+                    <label>Organization</label>
+                </div>
+
+                <div class="checkbox">
+                    <input type="checkbox" value=".same"/>
+                    <label>Same</label>
+                </div>
+
+
+                <div class="checkbox">
+                    <input type="checkbox" value=".unknown"/>
+                    <label>Unknown</label>
+                </div>
+
+            </fieldset>
+
+            
+            <!-- LOCATION -->
+            
+            <fieldset class="filter-group checkboxes">
+
+                <h4>Location</h4>
+
+                    <div class="checkbox">
+                        <input type="checkbox" value=".anthology"/>
+                        <label>Anthology</label>
+                    </div>
+
+                    <div class="checkbox">
+                            <input type="checkbox" value=".collection"/>
+                            <label>Collection</label>
+                        </div>
+
+                    <div class="checkbox">
+                            <input type="checkbox" value=".database"/>
+                            <label>Database</label>
+                        </div>
+
+                    <div class="checkbox">
+                            <input type="checkbox" value=".dictionary"/>
+                            <label>Dictionary</label>
+                        </div>
+
+                    <div class="checkbox">
+                            <input type="checkbox" value=".magazine"/>
+                            <label>Magazine</label>
+                        </div>
+
+                    <div class="checkbox">
+                            <input type="checkbox" value=".newspaper"/>
+                            <label>Newspaper</label>
+                        </div>
+
+
+                      <div class="checkbox">
+                            <input type="checkbox" value=".onlinedatabase"/>
+                            <label>Online Database</label>
+                        </div>
+
+                    <div class="checkbox">
+                            <input type="checkbox" value=".onlinemagazine"/>
+                            <label>Online Magazine</label>
+                        </div>
+
+                    <div class="checkbox">
+                            <input type="checkbox" value=".onlinescholarlyjournal"/>
+                            <label>Online Scholarly Journal</label>
+                        </div>
+
+                    <div class="checkbox">
+                            <input type="checkbox" value=".scholarlyjournal"/>
+                            <label>Scholarly Journal</label>
+                        </div>
+
+                    <div class="checkbox">
+                            <input type="checkbox" value=".websitelocation"/>
+                            <label>Website</label>
+                        </div>
+
+            </fieldset>    
+  
+        </form>
+
+    </div>
+        
+    
+    <div class = "responsivecontainerright" id="Container">
+    
+        <!-- SWIPING ANIMATION --> 
+        
+        <div id = "swipearea"><span class = "swipeinstructions">Swipe right to open the filter panel.</span>
+            <iframe id = "swipegesture" width="195px" height="170px" class = "animation" src="Swiping%20Animation.html" 
+         scrolling="none" seamless></iframe>
+                </div>
+
+        <!-- CONTAINER FOR CARDS -->
+        <div  class="container">
+
+            <div class="fail-message"><span style = "color:#FF626D; font-family:'Helvetica Neue'; font-weight:300;">We couldn't find any items matching the selected filters.</span>
+            </div>
+
+           
+            <!-- MLA CARDS -->
+
+            <div class = "card mix mla book oneauthor one author print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>Book with One Author</h5><p>Last Name, First Name. <span class = "italics">Title of Book.</span> Publisher, Publication Year.</p>
+            </div>
+
+            <div class = "card mix mla book oneauthor one author print add" style = "z-index:20"><a href = "http://www.upswing.io" ><img src="Ad.svg" class = "MLApocket"></a><h5>This is an Ad.</h5><p><a href="http://www.data.com">Amazing Data Report.</a> <span class = "italics">More advertisement.</span> More advertisement.</p>
+            </div>
+
+            <div class = "card mix mla book twoauthors two author print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>Book with Two Authors</h5><p>Last Name, First Name, and First Name of Second Author Last Name of Second Author. <span class = "italics">Title of Book.</span> Publisher, Publication Year.</p>
+            </div>
+
+
+            <div class = "card mix mla book morethantwoauthors more three print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>Book with More Than Two Authors</h5><p>Last Name of First Author, First Name of First Author, et al. <span class = "italics">Title of Book.</span> Publisher, Publication Year.</p>
+            </div>
+
+
+            <div class = "card mix mla book same author print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>Books with the Same Author</h5><p>Last Name, First Name. <span class = "italics">Title of Book That Comes First Alphabetically.</span> Publisher, Publication Date.</p><p style = "margin-top:-70px">--. <span class = "italics">Title of Book That Comes Second Alphabetically.</span> Publisher, Publication Year.</p>    
+            </div>
+
+            <div class = "card mix mla book unknown no anonymous print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>Book with No Author</h5><p><span class = "italics">Title of Book.</span> Publisher, Publication Year.</p><notes class = "notes">*Treat authorless entries like any other entry and arrange them alphabetically.</notes>
+            </div>
+
+            <div class = "card mix mla book editor print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>Book Prepared by an Editor</h5><p><span class = "italics">Title of Book.</span> Edited by First Name of Editor Last Name of Editor, Publisher, Publication Year.</p>
+            </div>
+
+             <div class = "card mix mla book editor print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>Book Prepared by Two Editors</h5><p><span class = "italics">Title of Book.</span> Edited by First Name of First Editor Last Name of First Editor and First Name of Second Editor Last Name of Second Editor, Publisher, Publication Year.</p>
+            </div>
+
+            <div class = "card mix mla book edition print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>Edition of a Book</h5><p><span class = "italics">Title of Book.</span> *Edition Number ed., Publisher, Publication Year.</p><notes class = "notes">*For example: 3rd ed.</notes>
+            </div>
+
+            <div class = "card mix mla book corporation organization print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>Book by Corporation or Organization</h5><p>Name of Corporation or Organization. <span class = "italics">Title of Book.</span> Edited by First Name of Editor Last Name of Editor, Publisher, Publication Year.</p><notes class = "notes">*If the author and publishers are the same, list only the title followed by the publisher's name.</notes>
+            </div>
+
+            <div class = "card mix mla book republished print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>Republished Book</h5><p>Last Name, First Name. <span class = "italics">Title of Book.</span> Original Publication Year. Publisher, Publication Year.</p>
+            </div>
+
+            <div class = "card mix mla entry anthology print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>Entry in an Anthology</h5><p>Last Name of Author, First Name of Author. "Title of Entry." <span class = "italics">Title of Anthology,</span> edited by Editor's First Name Editor's Last Name, Publisher, Publication Year, *Page range of entry.</p><notes class = "notes">*For example: pp. 173-178.</notes>
+            </div>
+
+            <div class = "card mix mla entry collection print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>Entry in a Collection</h5><p>Last Name of Author, First Name of Author. "Title of Entry." <span class = "italics">Title of Collection. </span>Publisher, Publication Year, *Page range of entry.</p><notes class = "notes">*For example: pp. 173-178.</notes>
+            </div>
+
+            <div class = "card mix mla shortstory anthology print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>A Short Story in an Anthology</h5><p>Last Name of Author, First Name of Author. "Title of Short Story."<span class = "italics">Title of Anthology,</span> edited by Editor's First Name Editor's Last Name, Publisher, Publication Year, *Page range of entry.</p><notes class = "notes" style = "margin-top:10px;">*For example: pp. 173-178.</notes>
+            </div>
+
+            <div class = "card mix mla shortstory collection print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>A Short Story in a Collection</h5><p>Last Name of Author, First Name of Author. "Title of Short Story."<span class = "italics">Title of Collection. </span>Publisher, Publication Year, *Page range of entry.</p><br><notes class = "notes" style = "margin-left:10px"><br>*For example: pp. 173-178.<br>**In a collection, all the works have the same author. In an anthology, the works of different authors are collected.</notes>
+            </div>
+
+
+            <div class = "card mix mla essay anthology print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>An Essay in an Anthology</h5><p>Last Name of Author, First Name of Author. "Title of Essay."<span class = "italics">Title of Anthology,</span> edited by Editor's First Name Editor's Last Name, Publisher, Publication Year, *Page range of entry.</p><notes class = "notes" style = "margin-top:10px;">*For example: pp. 173-178.</notes>
+            </div>
+
+
+            <div class = "card mix mla essay collection print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>An Essay in a Collection</h5><p>Last Name of Author, First Name of Author. "Title of Essay."<span class = "italics">Title of Collection. </span>Publisher, Publication Year, *Page range of entry.</p><notes class = "notes"><br>*For example: pp. 173-178.<br>**In a collection, all the works have the same author. In an anthology, the works of different authors are collected.</notes>
+            </div>
+
+            <div class = "card mix mla poem anthology print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>A Poem in an Anthology</h5><p>Last Name of Poet, First Name of Poet. "Title of Essay."<span class = "italics">Title of Anthology,</span> edited by Editor's First Name Editor's Last Name, Publisher, Publication Year, *Page range of entry.<notes class = "notes" style = "margin-top:10px;">*For example: pp. 173-178.</notes></p>
+            </div>
+
+            <div class = "card mix mla poem collection print"><img src="MLA%20Pocket.svg" class = "MLApocket"><h5>A Poem in a Collection</h5><p>Last Name of Poet, First Name of Poet. "Title of Poem."<span class = "italics">Title of Collection. </span>Publisher, Publication Year, *Page range of entry.</p><notes class = "notes" style = "margin-top:-6px;"><br>*For example: pp. 173-178.<br>**In a collection, all the works have the same author. In an anthology, the works of different authors are collected.</notes>
+            </div>
+
+    
+            <!-- APA CARDS -->
+
+            <div class="card mix apa book print oneauthor one author"><img src="APA%20Pocket.svg" class = "APApocket"><h5>Book with One Author</h5><p>Author, A. A. (Year of publication). <span class = "italics">Title of work: Capital letter also for subtitle.</span> Location: Publisher.</p></div>
+
+            <div class = "card mix apa book twoauthors two authors print"><img src="APA%20Pocket.svg" class = "APApocket"><h5>Book with Two Authors</h5><p>Author Last Name, A. A., & Author Last Name, B.B. (Year of publication). <span class = "italics">Title of work: Capital letter also for subtitle.</span> Location: Publisher.</p></div>
+
+         
+        </div>
+    
+   </div> 
+        
+        
+    
+    <script type="text/javascript" src="hammer.js"script></script>
+    <script>
+    
+    // SWIPING INTERACTION CODE
+    
+         function openNav() {
+            document.getElementById("Filters").style.width = "auto";
+            };
+        
+            var swipearea = document.getElementById('swipearea');
+            var swipeareared = document.getElementById('swipeareared');
+            var swipegesture = document.getElementById('swipegesture');
+            var swipegesturered = document.getElementById('swipegesturered');
+            var bodything = document.getElementById('bodything');
+            var filterPanel = document.getElementById('filterPanel');
+            var cardcontainer = document.getElementById('Container');
+            var navbar = document.getElementById('navbar');
+           /* var responsivecontainer = document.getElementById('responsivecontainer');*/
+
+            var mc = new Hammer(filterPanel);
+            var mc2 = new Hammer(bodything);
+            var mc3 = new Hammer (swipearea);
+            var mc4 = new Hammer (swipeareared);
+
+
+            mc3.on("swiperight", function(ev) {
+
+
+                filterPanel.style.webkitTransform ="translateX(0)";
+                /*filters.style.webkitTransition = "width 300ms cubic-bezier(.10, .10, .25, .90)";*/
+                filterPanel.style.webkitTransition = "width 300ms ease";
+                filterPanel.style.width = "100%";
+                cardcontainer.style.visibility = "hidden";
+
+                navbar.style.background = "#FF626D"
+                swipegesture.style.display = "none";
+                bodything.style.maxWidth = "100%";
+
+            });
+
+            mc2.on("swiperight", function(ev) {
+                   filterPanel.style.webkitTransform ="translateX(0)";
+               /* filters.style.webkitTransition = "width 300ms cubic-bezier(.10, .10, .25, .90)";*/
+                filterPanel.style.webkitTransition = "width 300ms ease";
+                filterPanel.style.width = "100%";
+                navbar.style.background = "#FF626D"
+               cardcontainer.style.visibility = "hidden";
+
+                swipegesture.style.display = "none";
+                bodything.style.maxWidth = "100%";
+
+            });
+
+            mc.on("swipeleft", function(ev) {
+                /*filters.style.transitionProperty = "width";
+                filters.style.transitionDuration = "0.5s";*/
+                filterPanel.style.width = "0";
+                cardcontainer.style.visibility = "visible";
+                swipegesturered.style.display = "none";
+                swipeareared.style.height = "auto";
+                navbar.style.background = "-webkit-linear-gradient(to right, #FF626D , #FFC371)" 
+                navbar.style.background = "linear-gradient(to right, #FF626D , #FFC371)" 
+
+                bodything.style.maxWidth = "380px";
+            });
+
+           mc4.on("swipeleft", function(ev) {
+                /*filters.style.transitionProperty = "width";*
+                filters.style.transitionDuration = "0.5s";*/
+                navbar.style.background = "-webkit-linear-gradient(to right, #FF626D , #FFC371);" 
+                navbar.style.background = "linear-gradient(to right, #FF626D , #FFC371);" 
+                filterPanel.style.width = "0";
+                cardcontainer.style.visibility = "visible";
+                swipegesturered.style.display = "none";
+                swipeareared.style.height = "auto";
+               bodything.style.maxWidth = "380px";
+
+            });
+
+
+    
+        </script>
+    
+    </body>
+    
 </html>
-
-
-
