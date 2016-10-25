@@ -907,6 +907,10 @@ h1 {
       border: 0;
     }
 
+    h1 strong, b {
+    color: #ffffff;
+    font-weight: 300;
+  }
 
 
 /* Dropotron */
@@ -969,10 +973,7 @@ h1 {
 /* Strong - added from Main */
 
 
-  strong, b {
-    color: #ffffff;
-    font-weight: 300;
-  }
+
 
 
 
