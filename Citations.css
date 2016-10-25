@@ -908,7 +908,7 @@ h1 {
     }
 
 
-    
+
 /* Dropotron */
 
   .dropotron {
@@ -966,7 +966,13 @@ h1 {
     margin-top: 0;
   }
 
+/* Strong - added from Main */
 
+
+  strong, b {
+    color: #ffffff;
+    font-weight: 300;
+  }
 
 
 
