@@ -792,6 +792,7 @@ fieldset{
     top: 0;
     width: 100%;
     z-index: 100;
+    font-family: 'Helvetica Neue', arial, sans-serif;
   }
 
     #header h1 {
@@ -859,8 +860,8 @@ fieldset{
 
 body, input, select, textarea {
     color: rgba(255, 255, 255, 0.75);
-    font-family: "Roboto", Helvetica, sans-serif;
-    font-size: 15pt;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 100%;
     font-weight: 100;
     line-height: 1.75em;
   }
