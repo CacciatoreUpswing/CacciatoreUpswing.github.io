@@ -854,7 +854,36 @@ fieldset{
     position: absolute;
   }
 
+/* HEY IT'S ME */
 
+body, input, select, textarea {
+    color: rgba(255, 255, 255, 0.75);
+    font-family: "Roboto", Helvetica, sans-serif;
+    font-size: 15pt;
+    font-weight: 100;
+    line-height: 1.75em;
+  }
+
+h1 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+  }
+
+h1 {
+    color: #ffffff;
+    font-weight: 300;
+    line-height: 1em;
+    margin: 0 0 1em 0;
+  }
+
+  h1 {
+      color: inherit;
+      border: 0;
+    }
 
 
 
