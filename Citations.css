@@ -494,7 +494,7 @@ fieldset{
     
 }
 
-.APApocket {
+.TXpocket {
     float:left;
     position:relative;
     z-index: 5;
@@ -507,7 +507,7 @@ fieldset{
     
 }
 
-.MLApocket {
+.NCpocket {
     float:left;
     position:relative;
     z-index: 5;
@@ -575,7 +575,7 @@ fieldset{
     
 }
 
-.tagMLA {
+.tagTX {
     position:absolute;
     z-index:;
     padding-left:5px;  
