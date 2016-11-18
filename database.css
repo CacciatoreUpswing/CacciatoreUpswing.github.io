@@ -119,6 +119,8 @@ input[type="text"]:focus {
     will-change: transform;
     will-change: width;
    -webkit-transform: translateZ(0);
+    resize:horizontal;
+    overflow:auto;
     
    
    
@@ -563,15 +565,15 @@ fieldset{
 
 .responsivecontainerleft {
     /*margin:0 auto;*/
-    height:100%;
-    overflow-y: scroll;
-     -webkit-overflow-scrolling: touch;
+    height:90%;
+    /*overflow-y: scroll;
+     -webkit-overflow-scrolling: touch;*/
     width:30%;
     position:fixed;
     float:left;
     z-index: 40;
-    resize:horizontal;
-    overflow-x:hidden;
+    resize: horizontal;
+    overflow: auto;
         
         
     }
@@ -585,10 +587,22 @@ fieldset{
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     z-index: 20;
-    resize:horizontal;
-    overflow-x:hidden;
+    resize: horizontal;
+    overflow: auto;
     
     
+}
+
+::-webkit-resizer {
+    border: 2px solid yellow;
+    background: blue;
+    box-shadow: 0 0 2px 5px red;
+    outline: 2px dashed green;
+
+    /*size does not work*/  
+    display:block;  
+    width: 150px !important;
+    height: 150px !important;
 }
 
 @media only screen and (max-width:763px) {
@@ -641,21 +655,7 @@ fieldset{
         margin-top:0px;
     }
     
-    .controls {
-        margin:0 auto;
-        z-index:20;
-        position:absolute;
-        width:100%;
-        left:0px;
-        float:none;
-        will-change: transform;
-        will-change: width;
-        -webkit-transform: translateZ(0);
-        height:auto;
-        
 
-        
-    }
     
     #swipearea {
         display:inherit; 
