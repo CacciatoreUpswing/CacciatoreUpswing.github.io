@@ -1,4 +1,4 @@
-@import url("http://fonts.googleapis.com/css?family=Roboto:100,300,100italic,300italic");
+@import url("https://fonts.googleapis.com/css?family=Roboto");
 
 html {
     
@@ -154,7 +154,6 @@ fieldset{
     margin-bottom: 8px;
     background:none;
     color:white;
-
 }
 
 
@@ -301,24 +300,21 @@ fieldset{
 }
 
 
-/* card */
+/* Cards */
 
 
 .card {
     position:relative;
-    /*margin:5px;*/
     margin:1%;
-    width:auto;
+    width:375px;
     max-width: 375px;
     border: 1px solid white;
     box-shadow: -3px 3px 10px rgba(0,0,0,0.50);
-    border:none;
-    
+    border:none;   
     height:350px;
-    border-radius: 5px;
+    border-radius: 7px;
     vertical-align: middle;
     z-index:-1;
-    background:white;
     transition: display 1s;
     transition-timing-function: ease-out;
     box-shadow: 0px 0px 12px 1px rgba(0,0,0,0.27);
@@ -332,17 +328,16 @@ fieldset{
       -webkit-transition: opacity 0.2s ease-in-out;
       -ms-transition: opacity 0.2s ease-in-out;
       transition: opacity 0.2s ease-in-out;
-      /*background: url("images/overlay.png");*/
-      border-radius: 0.35em;
+      border-radius: 7px;
       content: '';
       display: block;
-      height: 100%;
+      height: 350px;
       left: 0;
       opacity: 0.5;
       position: absolute;
       top: 0;
-      width: 100%;
-    }
+      width: 375px;
+     }
 
 
 
@@ -378,34 +373,43 @@ fieldset{
     .card:hover:before {
       background: url("images/overlay.png"), url("images/overlay.png");
       opacity: 1.0;
+      height:350px;
     }
 
 
 .card h5 {
-    /*float:left;*/
-    /*position:absolute; */
+
     text-align:center;
-    
-    /* top:0;
-    left:0;*/
-    /*opacity:0.9;*/
-    
-    font-family: 'Roboto';
+    font-family: 'Arial';
     font-size: 12px;
     color: black;
-    font-weight: 800;
+    font-weight: bold;
+    margin:0;
+    padding:0;
+    
+
+}
+
+
+.card h6 {
+
+    text-align:center;
+    font-family: 'Roboto';
+    font-size: 11px;
+    color: black;
+    font-weight: 400;
+    margin:0;
+    padding:0;
+
     
    
   
 }
 
 .card p {
-    /*position:relative;*/
-    /*float:left;*/
     font-family: 'Roboto';
     font-size: 14px;
     color: black;
-    /*text-shadow: 0px 1px 1px rgba(0,0,0,0.50);*/
     text-align:left;
     margin-top:-50px;
     margin-left:40px;
@@ -440,7 +444,6 @@ fieldset{
     font-family: HelveticaNeue;
     font-size: 14px;
     color: black;
-    /*text-shadow: 0px 1px 1px rgba(0,0,0,0.50);*/
     font-weight:400;
     
 }
@@ -482,14 +485,7 @@ fieldset{
   .input1:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s ease;}
 
 .leafover {
-    /*float:left;
-    position:absolute;
-    width: 0;
-	height: 0;
-	border-bottom: 100px solid red;
-	border-left: 100px solid transparent;
-    z-index: 5; */
-    
+
     float:left;
     position:relative;
     margin-right:10px;
@@ -565,11 +561,8 @@ fieldset{
 }
 
 .responsivecontainerleft {
-    /*margin:0 auto;*/
     height:90%;
-    /*overflow-y: scroll;
-     -webkit-overflow-scrolling: touch;*/
-    width:30%;
+    width:20%;
     position:fixed;
     float:left;
     z-index: 40;
@@ -581,10 +574,10 @@ fieldset{
 
 .responsivecontainerright {
     
-    width:70%;
+    width:80%;
     height:100%;
     position:fixed;
-    margin-left:30%;
+    margin-left:20%;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     z-index: 20;
@@ -599,8 +592,6 @@ fieldset{
     background: blue;
     box-shadow: 0 0 2px 5px red;
     outline: 2px dashed green;
-
-    /*size does not work*/  
     display:block;  
     width: 150px !important;
     height: 150px !important;
@@ -610,7 +601,6 @@ fieldset{
 
     .responsivecontainerleft {
         margin:0 auto;
-        /*max-width:380px;*/
         height:100%;
         width:0px;
         resize:horizontal;
@@ -643,12 +633,11 @@ fieldset{
     
     .card {
         height:auto;
-        /*max-height:250px;*/
         padding:0%;
     }
     
     .notes {
-        
+
         padding-top:60px;
     }
     
@@ -664,15 +653,14 @@ fieldset{
     }
  
     #swipeareared {
-        
         height: 0px;
         display:block;
         
     }
     
     #swipegesturered {
-        width="auto";
-        height="170px"; 
+        width: "auto";
+        height: "170px"; 
         margin:0 auto;
         position:relative;
         display:block;
@@ -689,8 +677,8 @@ fieldset{
 
     .animation {
         border:0px;
-        width="auto";
-        height="170px"; 
+        width: "auto";
+        height: "170px"; 
         margin:0 auto;
         position:relative;
         display:block;
@@ -707,8 +695,6 @@ fieldset{
     }
     
 }
-
-
 
 
 /* Header */
@@ -1148,146 +1134,124 @@ h1 {
       opacity: 0.25;
     }
 
-/*add the pill css here */
+/* Hashtags */
 
-.pill{
-  text-decoration:none;
-  color:#ffffff;
-  font-size:12px;
-  font-weight:bold;
-  padding:0 15px;
-  line-height:32px;
-  height: auto;
-  display:inline-block;
-  text-align:center;
-  background-color:#e76278;
-  -webkit-border-radius: 16px;
-  -moz-border-radius: 16px;
-  border-radius: 16px;
-  position: relative;
-  bottom: 40px;
-  left: auto;
+.pillregion {
+    background-color: #9966CC;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0 15px;
+    line-height: 32px;
+    height: auto;
+    display: inline-block;
+    text-align: center;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    border-radius: 16px;
+    position: relative;
+    bottom: 50px;
+    left: auto;
+
 
 }
-.pillregion
-{
-  background-color:purple;
-  text-decoration:none;
-  color:#ffffff;
-  font-size:12px;
-  font-weight:bold;
-  padding:0 15px;
-  line-height:32px;
-  height: auto;
-  display:inline-block;
-  text-align:center;
 
-  -webkit-border-radius: 16px;
-  -moz-border-radius: 16px;
-  border-radius: 16px;
-  position: relative;
-  bottom: 40px;
-  left: auto;
-}
 .pillsize
 {
-  background-color:yellow;
-    text-decoration:none;
-  color:#ffffff;
-  font-size:12px;
-  font-weight:bold;
-  padding:0 15px;
-  line-height:32px;
-  height: auto;
-  display:inline-block;
-  text-align:center;
-
-  -webkit-border-radius: 16px;
-  -moz-border-radius: 16px;
-  border-radius: 16px;
-  position: relative;
-  bottom: 40px;
-  left: auto;
+    background-color: #ff6666;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0 15px;
+    line-height: 32px;
+    height: auto;
+    display: inline-block;
+    text-align: center;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    border-radius: 16px;
+    position: relative;
+    bottom: 50px;
+    left: auto;
 }
+
 .pilldemographic
 {
-  background-color:gray;
-    text-decoration:none;
-  color:#ffffff;
-  font-size:12px;
-  font-weight:bold;
-  padding:0 15px;
-  line-height:32px;
-  height: auto;
-  display:inline-block;
-  text-align:center;
-
-  -webkit-border-radius: 16px;
-  -moz-border-radius: 16px;
-  border-radius: 16px;
-  position: relative;
-  bottom: 40px;
-  left: auto;
+    background-color: #e8b894;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0 15px;
+    line-height: 32px;
+    height: auto;
+    display: inline-block;
+    text-align: center;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    border-radius: 16px;
+    position: relative;
+    bottom: 50px;
+    left: auto;
 }
 .pillsubject
 {
-  background-color:orange;
-    text-decoration:none;
-  color:#ffffff;
-  font-size:12px;
-  font-weight:bold;
-  padding:0 15px;
-  line-height:32px;
-  height: auto;
-  display:inline-block;
-  text-align:center;
-
-  -webkit-border-radius: 16px;
-  -moz-border-radius: 16px;
-  border-radius: 16px;
-  position: relative;
-  bottom: 40px;
-  left: auto;
+    background-color: #BF5700;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0 15px;
+    line-height: 32px;
+    height: auto;
+    display: inline-block;
+    text-align: center;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    border-radius: 16px;
+    position: relative;
+    bottom: 50px;
+    left: auto;
 }
 .pillfinancialandliving
 {
-  background-color:green;
-    text-decoration:none;
-  color:#ffffff;
-  font-size:12px;
-  font-weight:bold;
-  padding:0 15px;
-  line-height:32px;
-  height: auto;
-  display:inline-block;
-  text-align:center;
-
-  -webkit-border-radius: 16px;
-  -moz-border-radius: 16px;
-  border-radius: 16px;
-  position: relative;
-  bottom: 40px;
-  left: auto;
+    background-color:#85bb65;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0 15px;
+    line-height: 32px;
+    height: auto;
+    display: inline-block;
+    text-align: center;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    border-radius: 16px;
+    position: relative;
+    bottom: 50px;
+    left: auto;
 }
 .pillupswing
 {
-  background-color:blue;
-    text-decoration:none;
-  color:#ffffff;
-  font-size:12px;
-  font-weight:bold;
-  padding:0 15px;
-  line-height:32px;
-  height: auto;
-  display:inline-block;
-  text-align:center;
-
-  -webkit-border-radius: 16px;
-  -moz-border-radius: 16px;
-  border-radius: 16px;
-  position: relative;
-  bottom: 40px;
-  left: auto;
+    background-color: #2196F3;  
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0 15px;
+    line-height: 32px;
+    height: auto;
+    display: inline-block;
+    text-align: center;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    border-radius: 16px;
+    position: relative;
+    bottom: 50px;
+    left: auto;
 }
 
 /* Basic */
@@ -1312,6 +1276,14 @@ h1 {
     font-family: "Roboto", Helvetica, sans-serif;
     font-size: 100%;
     font-weight: 100;
-   
   }
+
+.thumbnail{
+  background:url(images/r1_thumb.jpeg);
+  alt: "Preview not available.";
+  width:375px; 
+  height:296px;
+  position: "relative";
+  border-radius: 7px;
+}
 
