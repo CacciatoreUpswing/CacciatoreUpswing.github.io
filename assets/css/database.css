@@ -1,5 +1,6 @@
 @import url("font-awesome.min.css");
-@import url("http://fonts.googleapis.com/css?family=Roboto:100,300,100italic,300italic");
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+
 
 
 #swipearea {
@@ -311,7 +312,6 @@ fieldset{
     box-shadow: 0px 0px 12px 1px rgba(0,0,0,0.27);
     transition: box-shadow 0.3s ease;
 
-    
 }
 
     .card:before {
@@ -371,13 +371,11 @@ fieldset{
 .card h5 {
 
     text-align:center;
-    font-family: 'Arial';
-    font-size: 12px;
+    font-family: 'Roboto';
+    font-size: 14px;
     color: black;
-    font-weight: bold;
+    font-weight: 900;
     margin:0;
-    padding:10px;
-    
 
 }
 
@@ -386,15 +384,10 @@ fieldset{
 
     text-align:center;
     font-family: 'Roboto';
-    font-size: 11px;
+    font-size: 14px;
     color: black;
-    font-weight: 400;
     margin:0;
-    padding:0;
-
     
-   
-  
 }
 
 .card p {
@@ -409,7 +402,6 @@ fieldset{
     z-index = 1;
     font-weight: bold;
    
-
 }
 
 .notes {
@@ -427,8 +419,7 @@ fieldset{
     right:0px;
     text-indent:-3px;
     
-    
-    
+
 }
 .italics {
     font-style:italic;
@@ -489,9 +480,7 @@ fieldset{
     border-color: transparent transparent #8ea3ba transparent;
     z-index: 0;
     
-    
-
-    
+  
 }
 
 
@@ -541,6 +530,7 @@ fieldset{
 }
 
 .logo {
+    left: -40%;
     display:block;
     margin: 0 auto;
     border: none;
@@ -699,7 +689,6 @@ fieldset{
     text-decoration: none;
     color: #ffffff;
     font-size: 12px;
-    font-weight: bold;
     padding: 0 15px;
     line-height: 32px;
     height: auto;
@@ -708,8 +697,8 @@ fieldset{
     -webkit-border-radius: 16px;
     -moz-border-radius: 16px;
     border-radius: 16px;
-    position: relative;
-    bottom: -250px;
+    position: inherit;
+    bottom: -130px;
     left: auto;
 
 
@@ -721,7 +710,6 @@ fieldset{
     text-decoration: none;
     color: #ffffff;
     font-size: 12px;
-    font-weight: bold;
     padding: 0 15px;
     line-height: 32px;
     height: auto;
@@ -730,18 +718,18 @@ fieldset{
     -webkit-border-radius: 16px;
     -moz-border-radius: 16px;
     border-radius: 16px;
-    position: relative;
-    bottom: -250px;
+    position: inherit;
+    bottom: -130px;
+
     left: auto;
 }
 
 .pilldemographic
 {
-    background-color: #94e8b7;
+    background-color: #2c7048;
     text-decoration: none;
     color: #ffffff;
     font-size: 12px;
-    font-weight: bold;
     padding: 0 15px;
     line-height: 32px;
     height: auto;
@@ -750,8 +738,9 @@ fieldset{
     -webkit-border-radius: 16px;
     -moz-border-radius: 16px;
     border-radius: 16px;
-    position: relative;
-    bottom: -250px;
+    position: inherit;
+    bottom: -130px;
+
     left: auto;
 }
 .pillsubject
@@ -760,7 +749,6 @@ fieldset{
     text-decoration: none;
     color: #ffffff;
     font-size: 12px;
-    font-weight: bold;
     padding: 0 15px;
     line-height: 32px;
     height: auto;
@@ -769,8 +757,9 @@ fieldset{
     -webkit-border-radius: 16px;
     -moz-border-radius: 16px;
     border-radius: 16px;
-    position: relative;
-    bottom: -250px;
+    position: inherit;
+    bottom: -130px;
+
     left: auto;
 }
 .pillfinancialandliving
@@ -779,7 +768,6 @@ fieldset{
     text-decoration: none;
     color: #ffffff;
     font-size: 12px;
-    font-weight: bold;
     padding: 0 15px;
     line-height: 32px;
     height: auto;
@@ -788,8 +776,9 @@ fieldset{
     -webkit-border-radius: 16px;
     -moz-border-radius: 16px;
     border-radius: 16px;
-    position: relative;
-    bottom: -250px;
+    position: inherit;
+    bottom: -130px;
+
     left: auto;
 }
 .pillupswing
@@ -798,7 +787,6 @@ fieldset{
     text-decoration: none;
     color: #ffffff;
     font-size: 12px;
-    font-weight: bold;
     padding: 0 15px;
     line-height: 32px;
     height: auto;
@@ -807,8 +795,9 @@ fieldset{
     -webkit-border-radius: 16px;
     -moz-border-radius: 16px;
     border-radius: 16px;
-    position: relative;
-    bottom: -250px;
+    position: inherit;
+    bottom: -130px;
+
     left: auto;
 }
 
