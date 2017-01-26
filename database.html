@@ -4,15 +4,13 @@
     
     <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1">
     
-    <head>
-        
-        <link rel="stylesheet" href="database.css">
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script type="text/javascript" src="http://cdn.jsdelivr.net/jquery.mixitup/latest/jquery.mixitup.min.js"></script>
-    
+    <head>  
+
+      <link rel="stylesheet" href="assets/css/database.css">
+
     </head>
 
-        <div id="page-wrapper">   
+  <div id="page-wrapper">   
 
           <!-- Header -->
         <header id="header">
@@ -22,9 +20,9 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="#">What we offer</a>
               <ul>
-                                <li><a href="overview.html">Overview</a></li>
-                                <li><a href="basicbenchmarking.html">Basic Benchmarking</a></li>
-                                <li><a href="customsolutions.html">Custom Solutions</a></li>
+                  <li><a href="overview.html">Overview</a></li>
+                  <li><a href="basicbenchmarking.html">Basic Benchmarking</a></li>
+                  <li><a href="customsolutions.html">Custom Solutions</a></li>
               </ul>
             </li>
             <li><a href="database.html">Database</a></li>
@@ -32,205 +30,8 @@
             </ul>
           </nav>
         </header>
-      </div>
+ 
     
-    <script>
-    
-        // MIXITUP SCRIPT
-        
-        // To keep our code clean and modular, all custom functionality will be contained inside a single object literal called "multiFilter".
-
-        var multiFilter = {
-
-          // Declare any variables we will need as properties of the object
-
-          $filterGroups: null,
-          $filterUi: null,
-          $reset: null,
-          groups: [],
-          outputArray: [],
-          outputString: '',
-
-          // The "init" method will run on document ready and cache any jQuery objects we will need.
-  
-          init: function(){
-            var self = this; // As a best practice, in each method we will asign "this" to the variable "self" so that it remains scope-agnostic. We will use it to refer to the parent "checkboxFilter" object so that we can share methods and properties between all parts of the object.
-
-            self.$filterUi = $('#Filters');
-            self.$filterGroups = $('.filter-group');
-            self.$reset = $('#Reset');
-            self.$container = $('#Container');
-
-            self.$filterGroups.each(function(){
-              self.groups.push({
-                $inputs: $(this).find('input'),
-                active: [],
-                    tracker: false
-              });
-            });
-
-            self.bindHandlers();
-          },
-
-          // The "bindHandlers" method will listen for whenever a form value changes. 
-
-          bindHandlers: function(){
-            var self = this,
-                typingDelay = 300,
-                typingTimeout = -1,
-                resetTimer = function() {
-                  clearTimeout(typingTimeout);
-
-                  typingTimeout = setTimeout(function() {
-                    self.parseFilters();
-                  }, typingDelay);
-                };
-
-            self.$filterGroups
-              .filter('.checkboxes')
-                .on('change', function() {
-                self.parseFilters();
-                });
-
-            self.$filterGroups
-              .filter('.search')
-              .on('keyup change', resetTimer);
-
-            self.$reset.on('click', function(e){
-              e.preventDefault();
-              self.$filterUi[0].reset();
-              self.$filterUi.find('input[type="text"]').val('');
-              self.parseFilters();
-            });
-          },
-
-          // The parseFilters method checks which filters are active in each group:
-
-          parseFilters: function(){
-            var self = this;
-
-            // loop through each filter group and add active filters to arrays
-
-            for(var i = 0, group; group = self.groups[i]; i++){
-              group.active = []; // reset arrays
-              group.$inputs.each(function(){
-                var searchTerm = '',
-                        $input = $(this),
-                    minimumLength = 3;
-
-                if ($input.is(':checked')) {
-                  group.active.push(this.value);
-                }
-
-                if ($input.is('[type="text"]') && this.value.length >= minimumLength) {
-                  searchTerm = this.value
-                    .trim()
-                    .toLowerCase()
-                    .replace(' ', '-');
-
-                  group.active[0] = '[class*="' + searchTerm + '"]'; 
-                }
-              });
-                group.active.length && (group.tracker = 0);
-            }
-
-            self.concatenate();
-          },
-
-          // The "concatenate" method will crawl through each group, concatenating filters as desired:
-
-          concatenate: function(){
-            var self = this,
-                  cache = '',
-                  crawled = false,
-                  checkTrackers = function(){
-                var done = 0;
-
-                for(var i = 0, group; group = self.groups[i]; i++){
-                  (group.tracker === false) && done++;
-                }
-
-                return (done < self.groups.length);
-              },
-              crawl = function(){
-                for(var i = 0, group; group = self.groups[i]; i++){
-                  group.active[group.tracker] && (cache += group.active[group.tracker]);
-
-                  if(i === self.groups.length - 1){
-                    self.outputArray.push(cache);
-                    cache = '';
-                    updateTrackers();
-                  }
-                }
-              },
-              updateTrackers = function(){
-                for(var i = self.groups.length - 1; i > -1; i--){
-                  var group = self.groups[i];
-
-                  if(group.active[group.tracker + 1]){
-                    group.tracker++; 
-                    break;
-                  } else if(i > 0){
-                    group.tracker && (group.tracker = 0);
-                  } else {
-                    crawled = true;
-                  }
-                }
-              };
-
-            self.outputArray = []; // reset output array
-
-              do{
-                  crawl();
-              }
-              while(!crawled && checkTrackers());
-
-            self.outputString = self.outputArray.join();
-
-            // If the output string is empty, show all rather than none:
-
-            !self.outputString.length && (self.outputString = 'all'); 
-
-            console.log(self.outputString); 
-
-            // ^ we can check the console here to take a look at the filter string that is produced
-
-            // Send the output string to MixItUp via the 'filter' method:
-
-              if(self.$container.mixItUp('isLoaded')){
-                self.$container.mixItUp('filter', self.outputString);
-              }
-          }
-        };
-
-        // On document ready, initialise our code.
-
-        $(function(){
-
-          // Initialize multiFilter code
-
-          multiFilter.init();
-
-          // Instantiate MixItUp
-
-          $('#Container').mixItUp({
-            controls: {   
-               enable: false // we won't be needing these
-            },
-            animation: {
-              easing: 'cubic-bezier(0.86, 0, 0.07, 1)',
-              queueLimit: 3,
-              duration: 300
-            }
-          });    
-
-
-
-
-        });
-
-
-    </script>
     
     
     <body id = "bodything">
@@ -242,20 +43,20 @@
         <form class="controls"   id="Filters">
             
             <!-- SWIPING ANIMATION -->
-            
             <div id = "swipeareared" class="">
               <span>Swipe left to close the filter panel.</span><br> 
-              <iframe id = "swipegesturered"  src="Swiping%20Animation%20-%20Left.html" scrolling="no" seamless></iframe>
+              <iframe id = "swipegesturered"  src="Swiping%20Animation%20-%20Left.html" scrolling="no" seamless>       
+              </iframe>
             </div>  
 
-            <!-- <fieldset class="filter-group search" style = "width:100%;  float:none; text-align:center; margin-top:5px;box-sizing:border-box" >
-            <h4>Search</h4>
-            <input class = "input1" type="text" placeholder=" . . ."/>
-            <button id="Reset">Clear Filters</button>
-            </fieldset> -->
+          <!--<fieldset class="filter-group search" style = "width:100%;  float:none; text-align:center; margin-top:5px;box-sizing:border-box" >
+          <h4>Search</h4>
+          <input class = "input1" type="text" placeholder=" . . ."/>
+          <button id="Reset">Clear Filters</button>
+          </fieldset> -->
 
-        
           <fieldset class="filter-group checkboxes">
+          <h3>Content Selection</h3>
             <h4>Location</h4>
             <div class="checkbox">
               <input type="checkbox" value=".NC"/>
@@ -290,11 +91,9 @@
     
             </fieldset>
  
-
         <!-- SOURCE TYPE CONT'D-->                
 
           <fieldset class="filter-group checkboxes">
-
             <h4>Demographic Groups</h4>
 
               <div class="checkbox">
@@ -442,7 +241,6 @@
                             <label>Schools with Upswing Tutors</label>
                         </div>
 
-
             </fieldset>    
   
         </form>
@@ -473,7 +271,6 @@
               <div class = "card mix math TX calculus algebra statistics" style = "z-index:20" > 
                 <h5>Comparative Study:</h5> <h6>How Texas Students compare to US Students in Math Courses</h6>
 
-                <img class = "thumbnail" src="images/r1_thumb.jpeg">
                 <div class="pillregion" >#Texas </div>
                 <div class="pillsubject">#Math </div>
               </div> 
@@ -484,7 +281,7 @@
               <div class = "math NC calculus algebra statistics card mix" style = "z-index:20" > 
                 <h5>Comparative Study:</h5> <h6>How North Carolina Students compare to US Students in Math Courses</h6>
 
-                <img class = "thumbnail" src="images/r1_thumb.jpeg">
+            
                 <div class="pillregion" >#NorthCarolina </div>
                 <div class="pillsubject" >#Math </div>
               </div> 
@@ -494,7 +291,7 @@
               <div class = "TX writing english card mix" style = "z-index:20" > 
                 <h5>Comparative Study:</h5> <h6>How Texas Students compare to US Students in Writing Courses</h6>
 
-                <img class = "thumbnail" src="images/r1_thumb.jpeg">
+            
                 <div class="pillregion" >#Texas </div>
                 <div class="pillsubject" >#Writing </div>
               </div> 
@@ -504,7 +301,7 @@
               <div class = "NC writing english card mix" style = "z-index:20" > 
                 <h5>Comparative Study:</h5> <h6>How North Carolina Students compare to US Students in Writing Courses</h6>
 
-                <img class = "thumbnail" src="images/r1_thumb.jpeg">
+               
                 <div class="pillregion" >#NorthCarolina </div>
                 <div class="pillsubject" >#Writing </div>
               </div> 
@@ -515,7 +312,7 @@
               <div class = "multiyear multisemester 10hr 100hr card mix" style = "z-index:20" > 
                 <h5>Trend Analysis:</h5> <h6>Does session length affect performance?</h6>
 
-                <img class = "thumbnail" src="images/r1_thumb.jpeg">
+             
                 <div class="pillupswing" >#longsessions </div>
               </div>  
             </a>
@@ -524,7 +321,7 @@
               <div class = "multiyear multisemester 10hr 100hr card mix" style = "z-index:20" > 
                 <h5>Trend Analysis:</h5> <h6>Do students who study at particular times have better scores?</h6>
 
-                <img class = "thumbnail" src="images/r1_thumb.jpeg">
+      
       
                 <div class="pillupswing" >#timeofday </div>
               </div> 
@@ -534,7 +331,7 @@
               <div class = "TX math calculus algebra statistics card mix" style = "z-index:20" > 
                 <h5>Comparative Study:</h5> <h6>How Texas Students compare to US Students in Math Courses</h6>
 
-                <img class = "thumbnail" src="images/r1_thumb.jpeg">
+                
                 <div class="pillregion" >#Texas </div>
                 <div class="pillsubject" >#Math </div>
               </div> 
@@ -544,7 +341,7 @@
               <div class = "TX math calculus algebra statistics card mix" style = "z-index:20" > 
                 <h5>Comparative Study:</h5> <h6>How North Carolina Students compare to US Students in Math Courses</h6>
 
-                <img class = "thumbnail" src="images/r1_thumb.jpeg">
+              
                 <div class="pillregion" >#NorthCarolina </div>
                 <div class="pillsubject" >#Math </div>
               </div> 
@@ -553,7 +350,7 @@
             <a href="report_summary.html">
               <div class = "africanamerican card mix" style = "z-index:20" > 
                 <h5>Comparative Study:</h5> <h6>Unique trends in tutoring for African American students</h6>
-                <img class = "thumbnail" src="images/r1_thumb.jpeg">
+             
                 <div class="pilldemographic" >#AfricanAmerican </div>
               </div> 
             </a>
@@ -562,7 +359,6 @@
               <div class = "biology card mix" style = "z-index:20" > 
                 <h5>Biology:</h5> <h6>An analysis of strategies and tools that enhance effectiveness</h6>
 
-                <img class = "thumbnail" src="images/r1_thumb.jpeg">
              
                 <div class="pillsubject" >#Biology </div>
               </div> 
@@ -572,7 +368,6 @@
               <div class = "statistics card mix" style = "z-index:20" > 
                 <h5>Trend Analysis:</h5> <h6>An analysis of strategies and tools that enhance effectiveness</h6>
 
-                <img class = "thumbnail" src="images/r1_thumb.jpeg">
                 <div class="pillsubject" >#Statistics </div>
                 <div class="pillsubject" >#Math </div>
               </div> 
@@ -582,7 +377,7 @@
               <div class = "multiyear inhousetutors card mix" style = "z-index:20" > 
                 <h5>Trend Analysis:</h5> <h6>Budgeting Learning Center Times for Optimal Effectiveness</h6>
 
-                <img class = "thumbnail" src="images/r1_thumb.jpeg">
+           
                 <div class="pillupswing" >#timeofday </div>
               </div> 
             </a>
@@ -591,7 +386,7 @@
               <div class = "math TX inhousetutors upswingtutors card mix" style = "z-index:20" > 
                 <h5>Comparative Study:</h5> <h6>How North Carolina developmental students compare to others in Math</h6>
 
-                <img class = "thumbnail" src="images/r1_thumb.jpeg">
+          
                 <div class="pillregion" >#Texas </div>
                 <div class="pillsubject" >#Math </div>
               </div> 
@@ -601,7 +396,7 @@
               <div class = "multiyear 10hr 100hr card mix " style = "z-index:20" > 
                 <h5>Trend Analysis:</h5> <h6>Do more sessions mean better scores?</h6>
 
-                <img class = "thumbnail" src="images/r1_thumb.jpeg">
+        
                 <div class="pillupswing" >#10hr </div>
                 <div class="pillupswing" >#100hr </div>
               </div> 
@@ -611,7 +406,6 @@
               <div class = "algebra card mix" style = "z-index:20" > 
                 <h5>Algebra:</h5> <h6> An analysis of strategies and tools that enhance effectiveness</h6>
 
-                <img class = "thumbnail" src="images/r1_thumb.jpeg">
   
                 <div class="pillsubject" >#Algebra </div>
                 <div class="pillsubject" >#Math </div>
@@ -622,7 +416,7 @@
               <div class = "card mix NC book oneauthor one author print add" style = "z-index:20" > 
                 <h5>Calculus:</h5> <h6> An analysis of strategies and tools that enhance effectiveness</h6>
 
-                <img class = "thumbnail" src="images/r1_thumb.jpeg">
+      
                 <div class="pillregion" >#Texas </div>
                 <div class="pillsubject" >#Math </div>
               </div> 
@@ -632,7 +426,7 @@
               <div class = "rural math card mix" style = "z-index:20" > 
                 <h5>Comparative Study:</h5> <h6>How rural college students compare to others in Math</h6>
 
-                <img class = "thumbnail" src="images/r1_thumb.jpeg">
+        
                 <div class="pillsize" >#rural </div>
                 <div class="pillsubject" >#Math </div>
               </div> 
@@ -642,7 +436,7 @@
               <div class = "rural writing card mix" style = "z-index:20" > 
                 <h5>Comparative Study:</h5> <h6>How rural college students compare to others in Writing</h6>
 
-                <img class = "thumbnail" src="images/r1_thumb.jpeg">
+ 
                 <div class="pillregion" >#rural</div>
                 <div class="pillsubject" >#Writing </div>
               </div> 
@@ -653,7 +447,7 @@
  
                 <h5>Comparative Study:</h5> <h6>How urban college students compare to others in Math courses</h6>
 
-                <img class = "thumbnail" src="images/r1_thumb.jpeg">
+                
                 <div class="pillregion" >#urban</div>
                 <div class="pillsubject" >#Writing </div>
               </div> 
@@ -661,95 +455,15 @@
         </div>
    </div> 
         
-        
+</body>
+</div>
     
-    <script type="text/javascript" src="hammer.js"script></script>
-    <script>
-    
-    // SWIPING INTERACTION CODE
-    
-         function openNav() {
-            document.getElementById("Filters").style.width = "auto";
-            };
-        
-            var swipearea = document.getElementById('swipearea');
-            var swipeareared = document.getElementById('swipeareared');
-            var swipegesture = document.getElementById('swipegesture');
-            var swipegesturered = document.getElementById('swipegesturered');
-            var bodything = document.getElementById('bodything');
-            var filterPanel = document.getElementById('filterPanel');
-            var cardcontainer = document.getElementById('Container');
-            var navbar = document.getElementById('navbar');
-           /* var responsivecontainer = document.getElementById('responsivecontainer');*/
-
-            var mc = new Hammer(filterPanel);
-            var mc2 = new Hammer(bodything);
-            var mc3 = new Hammer (swipearea);
-            var mc4 = new Hammer (swipeareared);
-
-
-            mc3.on("swiperight", function(ev) {
-
-
-                filterPanel.style.webkitTransform ="translateX(0)";
-                /*filters.style.webkitTransition = "width 300ms cubic-bezier(.10, .10, .25, .90)";*/
-                filterPanel.style.webkitTransition = "width 300ms ease";
-                filterPanel.style.width = "100%";
-                cardcontainer.style.visibility = "hidden";
-
-                navbar.style.background = "#FF626D"
-                swipegesture.style.display = "none";
-                bodything.style.maxWidth = "100%";
-
-            });
-
-            mc2.on("swiperight", function(ev) {
-                   filterPanel.style.webkitTransform ="translateX(0)";
-               /* filters.style.webkitTransition = "width 300ms cubic-bezier(.10, .10, .25, .90)";*/
-                filterPanel.style.webkitTransition = "width 300ms ease";
-                filterPanel.style.width = "100%";
-                navbar.style.background = "#FF626D"
-               cardcontainer.style.visibility = "hidden";
-
-                swipegesture.style.display = "none";
-                bodything.style.maxWidth = "100%";
-
-            });
-
-            mc.on("swipeleft", function(ev) {
-                /*filters.style.transitionProperty = "width";
-                filters.style.transitionDuration = "0.5s";*/
-                filterPanel.style.width = "0";
-                cardcontainer.style.visibility = "visible";
-                swipegesturered.style.display = "none";
-                swipeareared.style.height = "auto";
-                navbar.style.background = "-webkit-linear-gradient(to right, #FF626D , #FFC371)" 
-                navbar.style.background = "linear-gradient(to right, #FF626D , #FFC371)" 
-
-                bodything.style.maxWidth = "380px";
-            });
-
-           mc4.on("swipeleft", function(ev) {
-                /*filters.style.transitionProperty = "width";*
-                filters.style.transitionDuration = "0.5s";*/
-                navbar.style.background = "-webkit-linear-gradient(to right, #FF626D , #FFC371);" 
-                navbar.style.background = "linear-gradient(to right, #FF626D , #FFC371);" 
-                filterPanel.style.width = "0";
-                cardcontainer.style.visibility = "visible";
-                swipegesturered.style.display = "none";
-                swipeareared.style.height = "auto";
-               bodything.style.maxWidth = "380px";
-
-            });
-
-
-    
-        </script>
-
-        <!-- Scripts -->
+           <!--Scripts-->
+      <script src="assets/js/hammer.js"> </script>
+      <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+      <script type="text/javascript" src="http://cdn.jsdelivr.net/jquery.mixitup/latest/jquery.mixitup.min.js"></script>
+      <script src="assets/js/mixitup.js"> </script>
+      <script src="assets/js/swipe.js"> </script>
       <script src="assets/js/jquery.dropotron.min.js"></script>
-      <script src="test_minimaldrop.js"></script>
-
-    </body>
-    
+      <script src="assets/js/test_minimaldrop.js"></script> 
 </html>
